@@ -100,7 +100,7 @@ class Entry extends MyElement {
 
     const date = new Date(datetime)
 
-    time.innerText = date.toLocaleDateString('es-ES', this.dateFormat)
+    // time.innerText = date.toLocaleDateString('es-ES', this.dateFormat)
 
     const title = h1.innerHTML.trim()
     const slug = this.getAttribute('id')

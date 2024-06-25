@@ -204,7 +204,6 @@ class DiaryPanel extends MyElement {
             ${weeks
               .map(
                 (week) => html`
-                  <h2>Semana ${week}ª</h2>
                   <nav>
                     ${[...entries]
                       .filter((entry) => entry.getAttribute('week') === week)
