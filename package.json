@@ -1,0 +1,51 @@
+{
+  "name": "contractes",
+  "version": "1.0.0",
+  "description": "Propuestas de mejora a la ergonomía de los portales de transparencia de la contratación pública en Cataluña.",
+  "homepage": "https://contractes.netlify.app",
+  "bugs": {
+    "url": "https://github.com/JaimeObregon/contractes/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JaimeObregon/contractes.git"
+  },
+  "license": "AGPL-3.0-or-later",
+  "author": "Jaime Gómez-Obregón",
+  "type": "module",
+  "main": "httpdocs/index.html",
+  "scripts": {
+    "build": "bin/build.sh",
+    "serve": "bin/serve.sh"
+  },
+  "prettier": {
+    "semi": false,
+    "singleQuote": true
+  },
+  "stylelint": {
+    "overrides": [
+      {
+        "files": [
+          "*.js"
+        ],
+        "customSyntax": "postcss-styled-syntax"
+      }
+    ],
+    "extends": [
+      "stylelint-config-standard",
+      "stylelint-config-recess-order"
+    ],
+    "rules": {
+      "no-descending-specificity": null
+    }
+  },
+  "devDependencies": {
+    "esbuild": "^0.20.2",
+    "netlify": "^13.1.16",
+    "postcss-styled-syntax": "^0.6.4",
+    "prettier": "^2.8.2",
+    "stylelint": "^16.4.0",
+    "stylelint-config-recess-order": "^5.0.1",
+    "stylelint-config-standard": "^36.0.0"
+  }
+}

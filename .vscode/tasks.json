@@ -1,0 +1,11 @@
+{
+  "tasks": [
+    {
+      "isBackground": true,
+      "label": "Arranca el servidor de desarrollo",
+      "script": "serve",
+      "type": "npm"
+    }
+  ],
+  "version": "2.0.0"
+}
