@@ -1,1 +1,57 @@
-:-)
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="none" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="author" content="Jaime Gómez-Obregón" />
+    <meta
+      name="description"
+      content="Propuestas de mejora a la ergonomía de los portales de transparencia de la contratación pública en Cataluña."
+    />
+    <meta
+      name="theme-color"
+      media="(prefers-color-scheme: light)"
+      content="#fbf7f0"
+    />
+    <meta
+      name="theme-color"
+      media="(prefers-color-scheme: dark)"
+      content="#0d2630"
+    />
+
+    <meta
+      property="og:title"
+      content="Propuestas a los portales de contratación"
+    />
+    <meta
+      property="og:description"
+      content="Propuestas de mejora a la ergonomía de los portales de transparencia de la contratación pública en Cataluña."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://contractes.netlify.app" />
+    <meta
+      property="og:image"
+      content="https://contractes.netlify.app/assets/poster.webp"
+    />
+
+    <base href="/" />
+
+    <link rel="stylesheet" href="/build/website.css" />
+    <link rel="icon" type="image/svg+xml" href="/assets/icon.svg" />
+    <link rel="alternate" type="application/feed+json" href="/index.json" />
+    <script type="module" src="/build/website.js"></script>
+    <script>
+      const stored = localStorage.getItem('theme')
+      const system = window.matchMedia('(prefers-color-scheme: dark)').matches
+        ? 'dark'
+        : 'light'
+      document.querySelector('html').dataset.theme = stored ?? system
+    </script>
+    <title>Propuestas a los portales de contratación</title>
+  </head>
+  <body>
+    <x-theme-switcher></x-theme-switcher>
+  </body>
+</html>

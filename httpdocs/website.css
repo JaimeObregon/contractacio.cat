@@ -1,0 +1,431 @@
+@layer typography {
+  /**
+   * Merriweather, en una versión más actual que la que ofrece Google Fonts.
+   * Entre otras mejoras, incorpora las versalitas.
+   * Véase https://github.com/SorkinType/Merriweather
+   */
+
+  @font-face {
+    font-family: 'Merriweather';
+    font-style: italic;
+    font-weight: 300;
+    font-display: swap;
+    src: local('Merriweather Light Italic'), local('Merriweather-LightItalic'),
+      url(/fonts/Merriweather-LightItalic.woff2) format('woff2');
+  }
+
+  @font-face {
+    font-family: 'Merriweather';
+    font-style: italic;
+    font-weight: 400;
+    font-display: swap;
+    src: local('Merriweather Italic'), local('Merriweather-Italic'),
+      url(/fonts/Merriweather-Italic.woff2) format('woff2');
+  }
+
+  @font-face {
+    font-family: 'Merriweather';
+    font-style: italic;
+    font-weight: 700;
+    font-display: swap;
+    src: local('Merriweather Bold Italic'), local('Merriweather-BoldItalic'),
+      url(/fonts/Merriweather-BoldItalic.woff2) format('woff2');
+  }
+
+  @font-face {
+    font-family: 'Merriweather';
+    font-style: italic;
+    font-weight: 900;
+    font-display: swap;
+    src: local('Merriweather Black Italic'), local('Merriweather-BlackItalic'),
+      url(/fonts/Merriweather-BlackItalic.woff2) format('woff2');
+  }
+
+  @font-face {
+    font-family: 'Merriweather';
+    font-style: normal;
+    font-weight: 300;
+    font-display: swap;
+    src: local('Merriweather Light'), local('Merriweather-Light'),
+      url(/fonts/Merriweather-Light.woff2) format('woff2');
+  }
+
+  @font-face {
+    font-family: 'Merriweather';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: local('Merriweather Regular'), local('Merriweather-Regular'),
+      url(/fonts/Merriweather-Regular.woff2) format('woff2');
+  }
+
+  @font-face {
+    font-family: 'Merriweather';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: local('Merriweather Bold'), local('Merriweather-Bold'),
+      url(/fonts/Merriweather-Bold.woff2) format('woff2');
+  }
+
+  @font-face {
+    font-family: 'Merriweather';
+    font-style: normal;
+    font-weight: 900;
+    font-display: swap;
+    src: local('Merriweather Black'), local('Merriweather-Black'),
+      url(/fonts/Merriweather-Black.woff2) format('woff2');
+  }
+
+  /**
+   * Inter, de Rasmus Andersson, en su versión variable.
+   * Véase https://rsms.me/inter/
+   */
+
+  @font-face {
+    font-family: 'Inter var';
+    font-weight: 100 900;
+    font-display: swap;
+    font-style: normal;
+    font-named-instance: 'Regular';
+    src: url(/fonts/Inter-roman.var.woff2) format('woff2');
+  }
+
+  @font-face {
+    font-family: 'Inter var';
+    font-weight: 100 900;
+    font-display: swap;
+    font-style: italic;
+    font-named-instance: 'Italic';
+    src: url(/fonts/Inter-italic.var.woff2) format('woff2');
+  }
+
+  /**
+   * La tipografía para las listas numeradas (`<ol>`).
+   */
+
+  @font-face {
+    font-family: 'Numbered';
+    font-weight: normal;
+    font-display: swap;
+    font-style: normal;
+    font-stretch: normal;
+    src: url(/fonts/Numbered.woff2) format('woff2');
+  }
+}
+
+@layer system {
+  :root {
+    --type-xxx-small: 55%;
+    --type-xx-small: 65%;
+    --type-x-small: 75%;
+    --type-small: 85%;
+    --type-medium: 100%;
+    --type-large: 125%;
+    --type-x-large: 150%;
+    --type-xx-large: 200%;
+    --type-xxx-large: 275%;
+
+    --space-xx-small: 0.125em;
+    --space-x-small: 0.25em;
+    --space-small: 0.5em;
+    --space-medium: 1em;
+    --space-large: 2em;
+    --space-x-large: 3em;
+    --space-xx-large: 4em;
+    --space-xxx-large: 6em;
+
+    --font-serif: 'Merriweather', serif;
+    --font-sans: 'Inter var', sans-serif;
+    --font-mono: monospace;
+
+    --line-height-condensed: 1.3;
+    --line-height-normal: 1.6;
+
+    --line-width-normal: 50rem;
+    --line-width-wide: 70rem;
+    --line-width-x-wide: 80rem;
+
+    --delay-small: 150ms;
+    --delay-medium: 250ms;
+    --delay-large: 350ms;
+    --delay-x-large: 500ms;
+
+    /* Parte de https://unpkg.com/open-props/easings.min.css */
+    --ease-3: cubic-bezier(0.25, 0, 0.3, 1);
+    --ease-out-5: cubic-bezier(0, 0, 0, 1);
+    --ease-elastic-3: cubic-bezier(0.5, 1.25, 0.75, 1.25);
+    --ease-elastic-4: cubic-bezier(0.5, 1.5, 0.75, 1.25);
+  }
+}
+
+:root {
+  --type-base: calc(0.75em + 0.5vw);
+  --switch-size: 1.5em;
+  --bleed: var(--space-x-large);
+  --padding: var(--space-xx-large);
+  --chart-grid-color: var(--color-line);
+  --sprint-indicator-width: var(--space-xx-large);
+
+  /* 4 lines, less 1px extra per line for Safari */
+  --initial-height: calc(4 * (var(--space-large) - 1px));
+
+  font-size: 16px;
+  font-variant-numeric: oldstyle-nums;
+  line-height: var(--line-height-normal);
+  color-scheme: light dark;
+  color: var(--color-text);
+  cursor: default;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Inspirado en basecamp.com */
+:root {
+  --color-accent: #c71585;
+  --color-background: #fbf7f0;
+  --color-diary-nav: #ffefd4;
+  --color-panel: white;
+  --color-heading: #0d1a26;
+  --color-link: #c71585;
+  --color-highlight: #222222;
+  --color-highlight-inverted: #ffffff;
+  --color-text: #274059;
+  --color-text-pale: #707f8d;
+  --color-line: #e3dedc;
+  --color-warning: #fdba74;
+  --color-backdrop: #000000d9;
+  --color-initial-flourishes: green;
+}
+
+/* Inspirado en Smashing Magazine */
+@media screen {
+  :root[data-theme='dark'] {
+    --color-accent: #ccec88;
+    --color-background: #0d2630;
+    --color-diary-nav: #19313c;
+    --color-panel: #19313c;
+    --color-heading: #ffffff;
+    --color-link: #ccec88;
+    --color-highlight: #ffffff;
+    --color-highlight-inverted: #0a1e26;
+    --color-text: #dfdfdf;
+    --color-text-pale: #999;
+    --color-line: #244654;
+    --color-warning: #7f1d1d;
+    --color-backdrop: #0d2630f2;
+    --color-initial-flourishes: darkkhaki;
+  }
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: var(--type-base);
+  letter-spacing: 0.025em;
+  background: var(--color-background);
+}
+
+x-theme-switcher {
+  position: fixed;
+  width: var(--switch-size);
+  bottom: var(--space-medium);
+  right: var(--space-medium);
+  z-index: 1;
+}
+
+.container {
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+}
+
+.container main {
+  max-width: var(--line-width-wide);
+  margin: auto;
+  text-align: justify;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+}
+
+.container
+  main
+  :is(p, ul, ol, h2, address, blockquote, footer, x-columns, x-details) {
+  max-width: var(--line-width-normal);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.container main > section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xxx-large);
+}
+
+.container main > header {
+  margin-bottom: var(--space-x-large);
+  min-height: var(--initial-height);
+}
+
+.container main > footer {
+  font-size: var(--type-small);
+  margin-top: var(--space-xxx-large);
+  line-height: var(--line-height-condensed);
+}
+
+.container main > footer::before {
+  content: '';
+  display: block;
+  margin-bottom: var(--space-large);
+  width: var(--space-xxx-large);
+  border-top: 1px solid;
+}
+
+x-media,
+x-table,
+x-video,
+blockquote,
+figure {
+  margin: var(--space-large) auto;
+}
+
+x-aside > x-media {
+  margin: 0;
+}
+
+header {
+  min-height: var(--initial-height);
+  max-width: var(--line-width-normal);
+  margin: 0 auto;
+}
+
+x-post header {
+  max-width: var(--line-width-wide) !important;
+}
+
+header > p:first-of-type {
+  font-size: var(--type-large);
+  margin: 0 0 var(--space-small) 0;
+}
+
+header p {
+  max-width: inherit !important;
+}
+
+header x-initial ~ p .first-letter {
+  display: none;
+}
+
+header x-initial ~ p:first-of-type:first-line {
+  font-variant-caps: all-small-caps;
+}
+
+blockquote {
+  position: relative;
+  box-sizing: border-box;
+  padding-left: var(--bleed);
+  font-style: italic;
+}
+
+blockquote:before {
+  content: '”';
+  position: absolute;
+  font-size: var(--type-xx-large);
+  top: -0.125em;
+  left: 0;
+}
+
+blockquote :is(i, em) {
+  font-style: normal;
+}
+
+dialog {
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  padding: 0;
+  border: none;
+  background: none;
+  z-index: 1;
+  transition: ease-in-out var(--delay-large);
+  cursor: zoom-out;
+}
+
+dialog.open {
+  background: var(--color-backdrop);
+}
+
+dialog img {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  aspect-ratio: auto;
+  transition: ease-in-out var(--delay-large);
+  pointer-events: none;
+}
+
+dialog.open img {
+  inset: 5% !important;
+  width: 90% !important;
+  height: 90% !important;
+  opacity: 1 !important;
+  max-height: 100%;
+}
+
+@media (max-width: 64em) {
+  :root {
+    --bleed: var(--space-large);
+    --padding: var(--space-x-large);
+  }
+}
+
+@media (max-width: 48em) {
+  :root {
+    --padding: var(--space-large);
+  }
+}
+
+@media (max-width: 36em) {
+  :root {
+    --padding: var(--space-medium);
+  }
+}
+
+@media print {
+  :root {
+    --type-base: 80%;
+    --color-background: white;
+    --color-panel: ghostwhite;
+    --color-heading: black;
+    --color-highlight: black;
+    --color-text: black;
+    --color-text-pale: gray;
+    --color-line: lightgray;
+  }
+
+  @page {
+    size: auto;
+    margin: 3cm;
+  }
+
+  body {
+    margin: 0 auto;
+  }
+
+  .container {
+    height: auto;
+  }
+
+  x-media,
+  x-table,
+  x-video,
+  figure {
+    break-inside: avoid;
+  }
+
+  x-entry {
+    break-before: page;
+  }
+}
