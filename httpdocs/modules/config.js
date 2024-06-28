@@ -4,7 +4,7 @@ const chapters = ['diary/propuestas']
 
 const item = {
   id: '',
-  url: 'https://contractes.netlify.app/',
+  url: 'https://contractacio.cat/',
   title: 'Propuestas a los portales de contratación',
   content_text:
     'Propuestas de mejora a la ergonomía de los portales de transparencia de la contratación pública en Cataluña.',

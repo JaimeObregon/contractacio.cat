@@ -1,14 +1,14 @@
 {
-  "name": "contractes",
+  "name": "contractacio.cat",
   "version": "1.0.0",
   "description": "Propuestas de mejora a la ergonomía de los portales de transparencia de la contratación pública en Cataluña.",
-  "homepage": "https://contractes.netlify.app",
+  "homepage": "https://contractacio.cat",
   "bugs": {
-    "url": "https://github.com/JaimeObregon/contractes/issues"
+    "url": "https://github.com/JaimeObregon/contractacio.cat/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/JaimeObregon/contractes.git"
+    "url": "git+https://github.com/JaimeObregon/contractacio.cat.git"
   },
   "license": "AGPL-3.0-or-later",
   "author": "Jaime Gómez-Obregón",

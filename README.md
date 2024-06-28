@@ -1,4 +1,4 @@
-# contractes
+# contractacio.cat
 
 [![AGPL License](https://img.shields.io/badge/license-AGPL-blue.svg)](http://www.gnu.org/licenses/agpl-3.0)
 <span class="badge-patreon"><a href="https://patreon.com/jaime_gomez_obregon" title="Apoya este proyecto en Patreon"><img src="https://img.shields.io/badge/patreon-donate-yellow.svg" alt="Botón para donar en Patreon" /></a></span>
@@ -13,7 +13,7 @@ Es una aplicación estática (_frontend_) JavaScript, desarrollada íntegramente
 
 # Despliegue
 
-Con cada _push_ a GitHub el proyecto se construye (`yarn build`) y despliega en [contractes.netlify.app](https://contractes.netlify.app) (Netlify).
+Con cada _push_ a GitHub el proyecto se construye (`yarn build`) y despliega en [contractacio.cat](https://contractacio.cat) (Netlify).
 
 # Desarrollo
 

@@ -6,3 +6,9 @@
   from = "/*"
   to = "/index.html"
   status = 200
+
+[[redirects]]
+  from = "https://contractes.netlify.app"
+  to = "https://contractacio.cat"
+  status = 301
+  force = true
