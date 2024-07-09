@@ -212,30 +212,261 @@
 </x-entry>
 
 <x-entry>
-  <h1>Enlace roto de descarga de datos</h1>
+  <h1>Corregir el enlace roto a la descarga de datos</h1>
 
-  <p>[…]</p>
+  <p>
+    Existe en el producto digital de <abbr>AOC</abbr> para los portales de
+    transparencia de los ayuntamientos un enlace para la descarga de todos los
+    datos. Pero <strong>está roto y lleva a una página de error 404</strong>.
+  </p>
 
   <x-media>
     <img src="enlace-roto-1.webp" alt="…" width="943" height="686" />
     <img src="enlace-roto-2.webp" alt="…" width="943" height="686" />
-    <figcaption slot="caption">Hay un enlace roto en […]</figcaption>
+    <figcaption slot="caption">
+      Hay un enlace roto en el botón <q>Accede a todos los datos</q> de la
+      sección <q>Relación de contratos adjudicados (históricos)</q> del
+      <a
+        href="https://seu-e.cat/ca/web/castellardelvalles/govern-obert-i-transparencia/contractes-convenis-i-subvencions/relacio-de-contractes/relacio-de-contractes-adjudicats-historics"
+        >portal de transparencia de Castellar del Vallès</a
+      >. Este error se da también en la misma sección de otros ayuntamientos.
+    </figcaption>
   </x-media>
+
+  <h2>Recomendación</h2>
+
+  <p>
+    Corregir el enlace roto. E, idealmente,
+    <strong>integrar una herramienta de monitorización de excepciones</strong>
+    como <a href="https://sentry.io/">Sentry</a>, lo que permetiría detectar
+    este problema y otros errores que impactan negativamente en la experiencia
+    de usuario tan pronto como se producen.
+  </p>
 </x-entry>
 
 <x-entry>
-  <h1>Publicar primero los contratos más recientes</h1>
+  <h1>Utilizar coherentemente las tablas</h1>
 
   <p>
-    [BORRADOR] La primera página presenta ahora los contratos más antiguos. Esto
-    obliga a avanzar manualmente hasta la última página para ver los contratos
-    más recientes. […]
+    Al menos en el
+    <a
+      href="https://seu-e.cat/ca/web/manresa/govern-obert-i-transparencia/contractes-convenis-i-subvencions/relacio-de-contractes/relacio-de-contractes-adjudicats-historics"
+      >portal de transparencia de Manresa</a
+    >, los botones de descarga y acceso a los datos aparecen aparentemente
+    duplicados.
+  </p>
+
+  <p>
+    Quizá la primera fila de botones se refiere a la primera tabla de contratos;
+    y la segunda fila de botones, a la segunda tabla. Pero
+    <strong>esto no es evidente para el usuario</strong>. Y supone una
+    redundancia, además, antiestética. Por otro lado, representa una
+    incoherencia de diseño (<i>design inconsistency</i>), por cuanto, sin que
+    exista una razón clara, una tabla presenta sus acciones de descarga debajo y
+    la otra, en cambio, justo encima.
+  </p>
+
+  <x-media>
+    <img src="doble-botonera.avif" alt="…" width="943" height="686" />
+    <figcaption slot="caption">
+      A los ojos del usuario recién llegado, los botones para descargar y
+      acceder a los datos parecen repetidos.
+    </figcaption>
+  </x-media>
+
+  <p>
+    La incoherencia puede confundir y sorprender al usuario. Y, además, se
+    extiende también —entre otros— a la posición de los controles de paginación,
+    que están encima de la primera tabla pero debajo de la segunda. Y al filtro
+    de resultados, que —al menos para el citado caso de Manresa— solo existe en
+    la segunda tabla.
+  </p>
+
+  <h2>Recomendación</h2>
+
+  <p>
+    Aplicar
+    <a href="https://es.wikipedia.org/wiki/Principio_de_la_m%C3%ADnima_sorpresa"
+      >el principio de mínima sorpresa</a
+    >
+    y realizar los cambios necesarios para que los elementos análogos de la
+    interfaz de usuario —en este caso, las tablas de contratos— se comporten de
+    manera igualmente análoga.
+  </p>
+</x-entry>
+
+<x-entry>
+  <h1>Mostrar primero los contratos más recientes</h1>
+
+  <p>
+    No parece equivocado pensar que, en general,
+    <strong>el interés de un contrato decrece con el tiempo</strong>. Y que los
+    resultados de las búsquedas tienen para nuestros usuarios más valor cuanto
+    más actuales.
+  </p>
+
+  <p>
+    El argumento contrario también parece razonable: los contratos antiguos
+    tienen un interés más histórico o referencial que comercial<x-term
+      href="joan"
+    ></x-term
+    ><x-term href="mireia"></x-term> o informativo<x-term href="marc"></x-term
+    ><x-term href="paula"></x-term>.
+  </p>
+
+  <p>
+    Sin embargo, los primeros resultados de la tabla de contratos en el portal
+    de transparencia muestra de manera predeterminada los contratos más antiguos
+    de la base de datos. Contratos que hace años que fueron adjudicados y
+    ejecutados. Esto obliga al usuario a avanzar manualmente hasta la última
+    página para encontrar los expedientes más recientes.
   </p>
 
   <x-media>
     <img src="cronologia.webp" alt="…" width="943" height="686" />
     <figcaption slot="caption">
-      Actualmente aparecen en primer lugar los contratos más antiguos.
+      Actualmente se muestran de manera predeterminada contratos que llevan años
+      adjudicados y ejecutados.
     </figcaption>
   </x-media>
+
+  <h2>Recomendación</h2>
+
+  <p>
+    Cuando existan tablas de contratos, recomiendo mostrar los contratos en
+    orden cronológico inverso: primero los que más recientemente han sido
+    publicados, licitados, adjudicados, formalizados o modificados.
+  </p>
+</x-entry>
+
+<x-entry>
+  <h1>Emplear formatos vectoriales para las marcas</h1>
+
+  <p>
+    La imagen institucional es uno de los elementos más sensibles del diseño de
+    un servicio público digital. Sin embargo, es también uno de los elementos
+    más maltratados y desatendidos. Y es difícil transmitir al ciudadano una
+    imagen de respeto y profesionalidad cuando el emblema mismo del organismo
+    público es un mapa de bits borroso por una mala compresión.
+  </p>
+
+  <p>
+    Agrava esta situación la popularización, en los últimos años, de las
+    pantallas de alta densidad de píxeles.
+  </p>
+
+  <p>
+    <strong
+      >Los pictogramas y marcas deben mostrase en formatos vectoriales
+      (<abbr>SVG</abbr>)</strong
+    >. A diferencia de los formatos de mapa de bits, los gráficos vectoriales se
+    aprecian con calidad y nitidez a cualquier resolución y en cualquier
+    pantalla.
+  </p>
+
+  <p>
+    El emblema de la Generalitat de Catalunya es un mapa de bits tanto en la
+    cabecera como en el pie de página del Registro, pero en cambio se muestra en
+    forma vectorial al pie de la Plataforma.
+  </p>
+
+  <x-media>
+    <img src="registro-logo-1.avif" alt="…" width="943" height="686" />
+    <img src="registro-logo-2.avif" alt="…" width="943" height="686" />
+    <img src="plataforma-logo.avif" alt="…" width="943" height="686" />
+    <figcaption slot="caption">
+      El emblema de la Generalitat, ampliado, en la cabecera y el pie del
+      Registro; y en el pie de la Plataforma. Nótese la falta de definición de
+      los dos primeros (mapas de bits) frente al tercero (vectorial).
+    </figcaption>
+  </x-media>
+
+  <h2>Recomendación</h2>
+
+  <p>
+    Utilizar siempre gráficos <abbr>SVG</abbr> para marcas, logos y pictogramas.
+  </p>
+</x-entry>
+
+<x-entry>
+  <h1>Elidir correctamente el objeto de los contratos</h1>
+
+  <p>
+    Los contratos son mostrados al ciudadano en tablas, pero no todas las
+    columnas alojan el mismo tipo de contenido. Años, importes o códigos de
+    expediente son datos breves que se adaptan bien a una estructura tabular. El
+    objeto de un contrato, por el contrario, es texto mucho más extenso, que en
+    algunos casos puede llegar a contar con cientos de palabras.
+  </p>
+
+  <p>
+    Para limitar la extensión del objeto de los contratos a lo que
+    razonablemente cabe en una celda de una tabla, se eliden yuxtaponiendo unos
+    puntos suspensivos.
+  </p>
+
+  <p>
+    Pero la elipsis se está haciendo cortando drásticamente a partir del 150º
+    caracter. Esto provoca que las celdas tengan una altura desigual (algunas
+    tienen tres, y otras cuatro líneas). Y que la elisión y los puntos
+    suspensivos queden en posiciones arbitrarias donde cabría más texto. El
+    programador no puede controlarlo.
+  </p>
+
+  <x-media>
+    <img src="elisiones.avif" alt="…" width="943" height="686" />
+    <figcaption slot="caption">
+      El objeto de los contratos queda truncado de forma poco natural. Esto
+      puede resolverse con una simple propiedad <abbr>CSS</abbr>.
+    </figcaption>
+  </x-media>
+
+  <h2>Recomendación</h2>
+
+  <p>
+    Utilizar la propiedad <abbr>CSS</abbr> <code>line-clamp</code>, que resuelve
+    elegante y simplemente este problema. Véase
+    <a href="https://codepen.io/gareth53/pen/AwbQyO">este ejemplo</a> en
+    CodePen.
+  </p>
+</x-entry>
+
+<x-entry>
+  <h1>Omitir los decimales y la divisa en las celdas de resultados</h1>
+
+  <p>
+    Los céntimos de euro no son significativos para el usuario, y sustraen un
+    espacio importante en las reducidas celdas de las tablas de resultados.
+    Igualemente el símbolo del euros es redundante y puede explicitarse una
+    única vez en la cabecera de la columna, no en cada celda.
+  </p>
+
+  <p>
+    Como se aprecia en las imágenes adjuntas, esto reduce la cantidad de
+    información superflua en la tabla, mejora la legibilidad de los importes y
+    reduce la carga cognitiva en el usuario.
+  </p>
+
+  <x-media>
+    <img src="con-decimales.avif" alt="…" width="943" height="686" />
+    <img src="sin-decimales.avif" alt="…" width="943" height="686" />
+    <figcaption slot="caption">
+      Omitamos los decimales y la divisa para facilitar la legibilidad de los
+      importes.
+    </figcaption>
+  </x-media>
+
+  <p>
+    Los céntimos de euros sí deben mostrarse, em cambio, en la página dedicada a
+    cada contrato, donde no existen las limitaciones de espacio impuestas por la
+    estructura tabular.
+  </p>
+
+  <h2>Recomendación</h2>
+
+  <p>
+    Redondear al euro, en las tablas de resultados, todos los importes
+    económicos. Y quitar el símbolo del euro, por redundante, sustituyéndolo por
+    una mención en la cabecera de la columna.
+  </p>
 </x-entry>

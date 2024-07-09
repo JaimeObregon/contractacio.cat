@@ -85,8 +85,9 @@ class Diary extends Layout {
       })
 
     main.innerHTML += this.chapters
+      .reverse()
       .map(({ path, chapter, entries }) => {
-        const contents = entries.join('')
+        const contents = entries.reverse().join('')
         return html`
           <section name="${chapter}" path="${path}">${contents}</section>
         `
