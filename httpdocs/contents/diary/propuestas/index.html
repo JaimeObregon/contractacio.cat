@@ -103,49 +103,112 @@
     estudiarse— y otras fricciones interadministrativas probablemente obliguen a
     postergar esta acción.
   </p>
-
-  <x-media>
-    <img
-      src="plataforma.avif"
-      alt="Plataforma de Contratación"
-      width="943"
-      height="686"
-    />
-    <img
-      src="registro.avif"
-      alt="Registro de Contratos"
-      width="943"
-      height="686"
-    />
-    <figcaption slot="caption">
-      Los contrato públicos de Cataluña se publican en dos plataformas
-      diferentes: la Plataforma de Contratación y el Registro de Contratos. Esta
-      fragmentación dificulta el esfuerzo del usuario que puede llegar a uno
-      ignorando que existe también el otro.
-    </figcaption>
-  </x-media>
 </x-entry>
 
 <x-entry>
   <h1>Eliminar el aviso de <i>cookies</i> en la Plataforma</h1>
 
   <p>
-    [BORRADOR] El primer acceso a la Plataforma se ve interrumpido por un aviso
+    El primer acceso del usuario a la Plataforma se ve interrumpido por un aviso
     de
-    <i>cookies</i>. ¿Es necesario? ¿Instala las cookies aunque lo rechace o
-    acceda sin pasar por la portada? ¿Está la Administración obligada? El
-    Registro no tiene ningún aviso.
+    <i>cookies</i> que bloquea (<i>modal</i>) cualquier interacción con el
+    sitio. Esto supone una fricción entre el usuario y el servicio.
+    <strong>¿Es necesaria?</strong>
+  </p>
+
+  <p>
+    La obligación legal de informar y recabar el consentimiento del usuario no
+    es aplicable a todas las <i>cookies</i>, habiendo algunas excepciones para
+    <i>cookies</i> que son necesarias para el funcionamiento del sitio y no
+    pretenden de realizar un seguimiento de la actividad del usuario.
+  </p>
+
+  <p>
+    La
+    <a href="https://contractaciopublica.cat/es/proteccio-dades"
+      >política de cookies de la Plataforma</a
+    >
+    instala e informa de las cookies de Google Analytics, pero no informa de las
+    que instala YouTube. ¿Es necesario que la Plataforma de Contratación de
+    Cataluña instale en el navegador del usuario <i>cookies</i> de Google y de
+    YouTube que pueden suponer un compromiso de su privacidad y, además, activan
+    la obligación legal de presentar un incómodo aviso de información y
+    consentimiento?
   </p>
 
   <x-media>
     <img
-      src="aviso-de-cookies.webp"
+      src="aviso-de-cookies-2.webp"
       alt="Aviso de cookies"
       width="943"
       height="686"
     />
-    <figcaption slot="caption">[…]</figcaption>
+    <img
+      src="aviso-de-cookies-1.webp"
+      alt="Cookies en la Plataforma"
+      width="943"
+      height="686"
+    />
+    <figcaption slot="caption">
+      La plataforma da la bienvenida al usuario en su primera visita con un
+      molesto aviso de <i>cookies</i>. Aunque la política de <i>cookies</i> solo
+      informa de las de Google Analytics, también instalan <i>cookies</i> de
+      YouTube.
+    </figcaption>
   </x-media>
+
+  <h2>Recomendación</h2>
+
+  <p>
+    Si bien esto requiere de la consulta a los técnicos que implementaron la
+    integración con Google Analytics y YouTube, parece razonable pensar que las
+    cookies de ambos servicios externos son prescindibles y, por tanto, el aviso
+    modal que ahora sale al encuentro del usuario en su primer acceso a la
+    plataforma, podría desaparecer junto con la fricción que supone:
+  </p>
+
+  <ul>
+    <li>
+      <p>
+        <strong>Google Analytics</strong>. Las versiones más recientes del
+        servicio permiten el registro del tráfico sin la mediación de
+        <i>cookies</i>. Pero, a mayores, ¿es realmente necesario instalar Google
+        Analytics? ¿Se está haciendo un seguimiento activo y frecuente del
+        tráfico del portal para implementar mejoras?
+      </p>
+
+      <p>
+        El análisis de tráfico es habitual en sitios de comercio electrónico,
+        donde arroja luz sobre el comportamiento de los usuarios y la eficacia
+        de los canales de adquisición para optimizar las inversiones en
+        <i>marketing</i> digital y maximizar el retorno económico del sitio. Los
+        sitios web de la Administración, sin embargo, poco tienen que ver con
+        esta descripción. No hay compras en línea, ni inversión en publicidad
+        digital, y el servicio ha de estar en línea cualquiera que sea su
+        tráfico. La recomendación del autor de este informe es, simplemente,
+        descartar completamente Google Analytics. O, cuando menos, adoptar la
+        versión que no instala <i>cookies</i>.
+      </p>
+    </li>
+    <li>
+      <p>
+        <strong>YouTube</strong>. La presentación de vídeos de esta plataforma
+        podría hacerse también desde el dominio
+        <code>youtube-nocookie.com</code>, librando así, de nuevo, la
+        instalación de <i>cookies</i> que comprometen la privacidad del usuario
+        de la Plataforma de Contratación al tiempo que obliga a la presentación
+        del molesto aviso de información y solicitud de consentimiento.
+      </p>
+    </li>
+  </ul>
+
+  <p>
+    La eliminación de todas las cookies de seguimiento reduciría el esfuerzo de
+    mantenimiento y el riesgo legal: al no haber
+    <i>cookies</i> reguladas por la normativa, desaparece la necesidad de
+    revisar periódicamente la política de <i>cookies</i>. Y, con ella, el riesgo
+    de incumplir la normativa concerniente.
+  </p>
 </x-entry>
 
 <x-entry>
