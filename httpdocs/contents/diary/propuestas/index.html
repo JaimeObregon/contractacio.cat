@@ -472,3 +472,306 @@
     una mención en la cabecera de la columna.
   </p>
 </x-entry>
+
+<x-entry>
+  <h1>No tabular datos no tabulares</h1>
+
+  <p>
+    Tradicionalmente los programadores hemos abusado de las tablas como
+    contenedor visual para presentar datos al usuario. Seguramente porque los
+    registros de las bases de datos relacionales se reúnen en un contenedor
+    lógico también denominado tabla.
+  </p>
+
+  <p>
+    Pero las tablas como contenedor lógico no tienen que ver con las tablas como
+    componente presentacional. En el diseño de interfaces de usuario
+    <strong
+      >las tablas solo son adecuadas para datos de naturaleza tabular</strong
+    >. Y los contratos públicos encajan muy mal en esta definición, tal como se
+    aprecia en las siguientes capturas de pantalla.
+  </p>
+
+  <x-media>
+    <img src="tabla-1.avif" alt="…" width="943" height="686" />
+    <img src="tabla-2.avif" alt="…" width="943" height="686" />
+    <figcaption slot="caption">
+      Cuando presentamos en tablas datos de naturaleza no tabular la densidad de
+      información y la legibilidad se degradan.
+    </figcaption>
+  </x-media>
+
+  <p>
+    En la implementación actual, hay tantas columnas (19), que no caben. Esto
+    fuerza al usuario a realizar
+    <strong
+      >un incómodo y no evidente desplazamiento (<i>scroll</i>)
+      horizontal</strong
+    >. El aprovechamiento de la superficie útil de pantalla es asímismo pobre,
+    pues la mayoría de las celdas contienen grandes cantidades de espacio libre,
+    mientras que las columnas con mucho texto, como
+    <q>Descripción del expediente</q> o <q>Contrato</q>, no caben y se ven
+    forzadas a una estrechez prácticamente imposible.
+  </p>
+
+  <x-media>
+    <img src="tabla.avif" alt="…" width="943" height="686" />
+    <figcaption slot="caption">
+      Otro ejemplo actual, menos dramático, de resultados en forma tabular.
+      Nótese cómo las celdas de la tercera columna se presentan elididas porque
+      no caben, mientras que todas las demás, en cambio, gozan de espacio
+      sobrante.
+    </figcaption>
+  </x-media>
+
+  <h2>Recomendación</h2>
+
+  <p>
+    Recomiendo descartar las tablas para maquetar listas de contratos, y adoptar
+    en su lugar listas o cajas. Y mostrar en estos resultados solo los datos más
+    relevantes de cada contrato, presentando todos solo cuando el usuario abre
+    la vista detallada de uno.
+  </p>
+
+  <x-media>
+    <img src="otro-listado.avif" alt="…" width="943" height="686" />
+    <figcaption slot="caption">
+      Rediseñando el caso anterior como una lista se mejora la legibilidad de la
+      información y se evitan la mayoría de las elisiones, sin pérdida de
+      información. Nótese cómo se crea una jerarquía visual empleando el tamaño
+      y el contraste, la adición de pictogramas y el ergonómico aumento del área
+      activa de los resultados, en azul.
+    </figcaption>
+  </x-media>
+</x-entry>
+
+<x-entry>
+  <h1>Evitar las etiquetas cuando sea posible</h1>
+
+  <p>
+    La presentación columnar en forma <q>etiqueta: dato</q>, tradicional de la
+    representación de modelos de datos, resulta artificiosa en las interfaces de
+    usuario.
+  </p>
+
+  <blockquote>
+    <p>
+      Contrato: <strong>menor</strong><br />
+      Tipo: <strong>servicios</strong><br />
+      Adjudicatario: <strong>ACME, S. A.</strong><br />
+      Duración: <strong>1 mes y 9 días</strong><br />
+      Importe: <strong>123.456 €</strong>
+    </p>
+  </blockquote>
+
+  <p>
+    Muchas de estas etiquetas, además, son omitibles porque
+    <strong>el dato ya revela su propia naturaleza</strong>.
+  </p>
+
+  <h2>Recomendación</h2>
+
+  <p>
+    Recomiendo emplear proposiciones y conectores lingüísticos para construir
+    frases naturales con los datos, evitando —cuando sea posible— la forma
+    <q>etiqueta: dato</q>.
+  </p>
+
+  <blockquote>
+    <p>
+      Contrato <strong>menor</strong> de <strong>servicios</strong> —
+      <strong>1 mes y 9 días</strong> de duración<br />
+      Adjudicado a <strong>ACME, S.A</strong> por
+      <strong>123.456 €</strong>
+    </p>
+  </blockquote>
+
+  <p>
+    Esto ha de abordarse atendiendo a la naturaleza multilingüe de los portales
+    de contratación y conectando los datos con conectores comunes a plurales y
+    singulares.
+  </p>
+
+  <x-media>
+    <img src="listado.avif" alt="…" width="943" height="686" />
+    <figcaption slot="caption">
+      Un ejemplo de lista de resultados que evita las tablas y conecta los datos
+      para construir frases naturales que mejoran la legibilidad.
+    </figcaption>
+  </x-media>
+</x-entry>
+
+<x-entry>
+  <h1>Mostrar los estados como procesos</h1>
+
+  <p>
+    La contratación pública es un proceso, y durante su ciclo de vida los
+    contratos transitan por varios estados: como mínimo la licitación se
+    anuncia, el contrato se adjudica y finalmente se formaliza.
+  </p>
+
+  <p>
+    El ciudadano al que nos dirigimos<x-term href="marc"></x-term
+    ><x-term href="paula"></x-term> frecuentemente desconoce estas
+    complejidades, motivo por el cual puede ser útil informarle del estado del
+    contrato en el contexto del proceso de contratación.
+  </p>
+
+  <x-media>
+    <img src="detalle.avif" alt="…" width="1660" height="1124" />
+    <figcaption slot="caption">
+      Los portales de contratación actuales solo informan de la fase.
+    </figcaption>
+  </x-media>
+
+  <h2>Recomendación</h2>
+
+  <p>
+    Recomiendo presentar la información del estado del contrato en el contexto
+    del proceso de contratación.
+  </p>
+
+  <x-media>
+    <img src="proceso.avif" alt="…" width="918" height="324" />
+    <figcaption slot="caption">
+      Aunque el ciclo de vida del contrato puede ser más complejo y contener más
+      fases, esta representación proporciona al usuario una información mejor
+      contextualizada de la fase en la que se encuentra el contrato y lo que
+      está por venir.
+    </figcaption>
+  </x-media>
+</x-entry>
+
+<x-entry>
+  <h1>Hacer enlazables los contratos</h1>
+
+  <p>
+    Los contratos públicos se presentan actualmente al ciudadano en una tabla
+    ordenable, cada una de cuyas filas contiene un pictograma que, al ser tocado
+    o pinchado, abre una ventana modal con los detalles del expediente.
+  </p>
+
+  <x-media>
+    <img src="otro-listado-mas.avif" alt="…" width="2378" height="1272" />
+    <figcaption slot="caption">
+      Las actuales tablas de resultados y los pictogramas que abren el detalle
+      de cada una.
+    </figcaption>
+  </x-media>
+
+  <p>
+    Sin embargo, la implementación de este mecanismo modal no proporciona una
+    dirección <abbr>URL</abbr> unívoca a cada contrato. Esto, en la práctica,
+    <strong
+      >impide a los usuarios enlazar, compartir o guardar un contrato</strong
+    >
+    en sus marcadores.
+  </p>
+
+  <x-media>
+    <img src="modal.avif" alt="…" width="2378" height="1382" />
+    <figcaption slot="caption">
+      La ventana modal que se abre con la información detallada de un contrato.
+    </figcaption>
+  </x-media>
+
+  <h2>Recomendación</h2>
+
+  <p>
+    Recomiendo asignar a cada contrato una dirección <abbr>URL</abbr> única, a
+    ser posible corta, que presente automáticamente la ventana modal con los
+    detalles del contrato al ser abierta por un navegador. Esto permitirá a los
+    usuarios guardar y compartir contratos.
+  </p>
+
+  <x-media>
+    <img src="contratosdecantabria.avif" alt="…" width="2386" height="1592" />
+    <figcaption slot="caption">
+      En
+      <a href="https://contratosdecantabria.es">contratosdecantabria.es</a> cada
+      contrato tiene una dirección <abbr>URL</abbr> única, que el usuario puede
+      copiar y compartir.
+    </figcaption>
+  </x-media>
+</x-entry>
+
+<x-entry>
+  <h1>No mostrar al usuario las direcciones <abbr>URL</abbr></h1>
+
+  <p>
+    Las direcciones <abbr>URL</abbr> son un identificador técnico de un recurso
+    en línea. Cada recurso —e, idealmente, cada estado significativo de la
+    interfaz de usuario— ha de disponer de una dirección <abbr>URL</abbr> única.
+    El usuario ha de poder consultarla en las barras de direcciones y de estado
+    de su navegador, pero se considera una buena práctica no mostrarlas
+    directamente como un dato en la interfaz.
+  </p>
+
+  <p>
+    Las direcciones <abbr>URL</abbr> pueden ser largas y crípticas, y amedrentar
+    a algunos de nuestros usuarios<x-term href="paula"></x-term> o provocar su
+    desconfianza.
+  </p>
+
+  <blockquote>
+    <p>
+      Modificaciones de contratos:<br />
+      <a
+        href="http://www.manresa.cat/web/article/6073-modificacions-de-contractes"
+        >http://www.manresa.cat/web/article/6073-modificacions-de-contractes</a
+      >
+    </p>
+  </blockquote>
+
+  <x-media>
+    <img src="url-1.avif" alt="…" width="2386" height="1592" />
+    <img src="url-2.avif" alt="…" width="2386" height="1592" />
+    <figcaption slot="caption">…</figcaption>
+  </x-media>
+
+  <h2>Recomendación</h2>
+
+  <p>
+    Recomiendo sustituir las direcciones <abbr>URL</abbr> visibles en la
+    interfaz de usuario por un texto descriptivo del recurso al que enlazan.
+    Seguirán siendo interactivas, pero más legibles.
+  </p>
+
+  <blockquote>
+    <p>
+      Véanse las
+      <a
+        href="http://www.manresa.cat/web/article/6073-modificacions-de-contractes"
+        >modificaciones de contratos</a
+      >
+      en el portal del Ayuntamiento.
+    </p>
+  </blockquote>
+</x-entry>
+
+<x-entry>
+  <h1>Ocultar las secuencias de control</h1>
+
+  <p>
+    Es frecuente que la descripción del objeto de un contrato contenga saltos de
+    línea, retornos de carro o tabulaciones. Actualmente estás secuencias de
+    control del flujo del texto se están mostrando en la interfaz de usuario
+    como
+    <code>\n</code>, <code>\r</code> o <code>\t</code>.
+  </p>
+
+  <x-media>
+    <img src="secuencias-de-control.avif" alt="…" width="2472" height="1238" />
+    <figcaption slot="caption">
+      Omitir las secuencias de control es simple y mejora la legibilidad.
+    </figcaption>
+  </x-media>
+
+  <h2>Recomendación</h2>
+
+  <p>
+    Reemplazar por espacios las secuencias <code>\n</code>, <code>\r</code> y
+    <code>\t</code> —entre quizá otras— antes de enviarlas a la interfaz de
+    usuario.
+  </p>
+</x-entry>
