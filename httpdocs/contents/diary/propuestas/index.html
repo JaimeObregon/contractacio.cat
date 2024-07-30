@@ -775,3 +775,45 @@
     usuario.
   </p>
 </x-entry>
+
+<x-entry>
+  <h1>Precargar los resultados</h1>
+
+  <p>
+    La página que muestra la relación de contratos adjudicados en algunos
+    ayuntamiento contiene dos tablas. La paginación y reordenación de la primera
+    es instantánea, porque se precargan desde el servidor todos los resultados y
+    estas operaciones las realiza el navegador del usuario. En el caso de la
+    segunda, en cambio, la paginación, reordenación y filtrado puede llevar
+    varios segundos, porque estas operaciones se solicitan al servidor.
+  </p>
+
+  <p>
+    Desde el punto de vista del usuario es más conveniente precargar todos los
+    resultados desde el servidor una única vez y cachearlos para evitar
+    descargas redundantes. Esto, sin embargo puede ser desaconsejable si el
+    volumen de datos es muy grande.
+  </p>
+
+  <h2>Recomendación</h2>
+
+  <p>
+    Recomiendo precargar todos los datos desde el servidor y realizar las
+    operaciones de ordenación, paginación y filtrado en el navegador. Los datos
+    <abbr>JSON</abbr> descargados tienen una razón de compresión de en torno al
+    85&nbsp;% si Brotli o gzip están habilitados en el servidor, lo que reduce
+    drásticamente el ancho de banda y el timpo de descarga. Por otro lado, el
+    documento <abbr>JSON</abbr>
+    contiene datos que aparentemente no son mostrados en las tablas, y que
+    podrían quitarse para reducir el volumen de los datos.
+  </p>
+
+  <x-media>
+    <img src="json.avif" alt="…" width="3032" height="1448" />
+    <figcaption slot="caption">
+      El documento <abbr>JSON</abbr> solicitado al servidor contiene campos
+      voluminosos que no son mostrados en las tablas, y probablemente podrían
+      eliminarse para reducir el volumen de los datos a precargar.
+    </figcaption>
+  </x-media>
+</x-entry>
