@@ -139,6 +139,7 @@ const styles = css`
   figcaption {
     margin: var(--space-small) auto;
     font-size: var(--type-x-small);
+    max-width: var(--line-width-normal);
     text-align: center;
   }
 
