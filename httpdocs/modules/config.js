@@ -1,6 +1,6 @@
 import { css } from './element.js'
 
-const chapters = ['diary/propuestas']
+const chapters = ['diary/buscador', 'diary/propuestas']
 
 const item = {
   id: '',

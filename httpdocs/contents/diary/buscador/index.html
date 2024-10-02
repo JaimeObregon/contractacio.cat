@@ -1,0 +1,167 @@
+<h1>Buscador integral</h1>
+
+<x-entry>
+  <h1>Nombres de contratistas normalizados</h1>
+
+  <p>
+    Idealmente se indexarán y mostrarán los nombres de los contratistas
+    normalizados según el censo de obligados tributarios de la agencia
+    tributaria autonómica o estatal. Para la AEAT estatal se trata del Modelo
+    030: Comprobación de un NIF de terceros a efectos censales.
+  </p>
+</x-entry>
+
+<x-entry>
+  <h1>Búsqueda difusa</h1>
+
+  <p>
+    El motor realizará una búsqueda difusa (<i>fuzzy</i>), de modo que será
+    tolerante a erratas tanto en la cadena de búsqueda introducida por el
+    usuario como en los datos indexados.
+  </p>
+</x-entry>
+
+<x-entry>
+  <h1>Búsqueda con sinónimos</h1>
+
+  <p>
+    El buscador implementará un pequeño diccionario de sinónimos construido a
+    medida para este caso de uso.
+  </p>
+
+  <p>
+    Así, y por ejemplo, el término <q>ayuntamiento</q> será sinónimo de
+    <q>ajuntament</q> y devolverán ambos los mismos términos. Ídem con
+    <q>terrassa</q> y <q>tarrasa</q>, <q>catalunya</q> y <q>cataluña</q> y otros
+    términos y topónimos.
+  </p>
+</x-entry>
+
+<x-entry>
+  <h1>Filtrado contextual</h1>
+
+  <p>
+    Los controles para ajustar la búsqueda que se han omitido de la interfaz
+    inicial aparecerán una vez el usuario ha cursado una búsqueda y se han
+    presentado resultados.
+  </p>
+
+  <p>
+    Serán controles contextuales, ajustados a los resultados de la búsqueda
+    realizada.
+  </p>
+
+  <p>
+    Por ejemplo, el control de rango (<i>slider</i>) para filtrar los contratos
+    por su presupuesto económico presentará un valor mínimo y máximo coincidente
+    con el presupuesto del valor mínimo y máximo de todos los contratos
+    resultantes de la búsqueda.
+  </p>
+
+  <p>
+    Por ejemplo, si hay pocos resultados de búsqueda no se mostrarán controles
+    para su filtrado.
+  </p>
+</x-entry>
+
+<x-entry>
+  <h1>Resultados mixtos</h1>
+
+  <p>
+    El buscador devolverá tres tipos de resultados: contratos, contratistas y
+    órganos de contratación.
+  </p>
+
+  <p>
+    Cada resultado se presentará en forma de tarjeta, teniendo cada tarjeta unos
+    datos y diseño diferente en función del tipo de resultado.
+  </p>
+
+  <p>
+    Las tarjetas de los resultados se dispondrán en forma de mosaico
+    (<i>masonry</i>).
+  </p>
+
+  <p>
+    Los resultados de cada búsqueda se ordenarán según su relevancia,
+    priorizándose primero los órganos de contratación y los contratistas
+    coincidentes —que serán generalmente pocos— y después los contratos, más
+    numerosos.
+  </p>
+</x-entry>
+
+<x-entry>
+  <h1>Búsqueda mientras se escribe</h1>
+
+  <p>El buscador arrojará resultados de búsqueda mientras el usuario teclea.</p>
+
+  <p>
+    Esto incentivará al usuario a buscar más y refinar sus búsquedas, pues el
+    coste percibido de cada búsqueda se reduce drásticamente al evitarse la
+    pulsación de un botón de búsqueda y la recarga de la página.
+  </p>
+
+  <p>
+    He comprobado con la base de datos de la estatal Plataforma de Contratación
+    del Sector Público que es posible arrojar resultados de tiempo real con una
+    cadencia inferior a 400 milisegundos para la mayoría de las búsquedas.
+  </p>
+
+  <p>
+    Los resultados se presentarán sin paginar, con desplazamiento
+    (<i>scroll</i>) infinito cuando el usuario se aproxima hacia el final del
+    mosaico de resultados.
+  </p>
+</x-entry>
+
+<x-entry>
+  <h1>Campo único</h1>
+
+  <p>
+    La interfaz del buscador consistirá en un único campo de entrada de texto.
+  </p>
+
+  <p>
+    Un texto de marcador de posición (<i>placeholder text</i>) y el pictograma
+    de una lupa sobreimpreso en la parte derecha del campo expresarán al usuario
+    que se trata de un buscador.
+  </p>
+
+  <p>
+    En el momento de la carga de la página el campo recibirá automáticamente el
+    foco del teclado, invitando el cursor de texto intermitente al usuario a
+    teclear inmediatamente.
+  </p>
+
+  <p>No habrá si quiera botón <q>Buscar</q>.</p>
+</x-entry>
+
+<x-entry>
+  <h1>Buscador integral</h1>
+
+  <p>
+    Se ofrecerá al usuario un único buscador de contratos, contratistas y
+    órganos de contratación de Cataluña. Este será el único punto de entrada a
+    la experiencia de búsqueda.
+  </p>
+
+  <p>
+    Se abstraerán así para el ciudadano las particularidades internas a la
+    Administración que provocan la actual coexistencia del Registro Público de
+    Contratos y la Plataforma de Contratación.
+  </p>
+
+  <p>
+    Este buscador agregará los resultados de todos los órganos de contratación,
+    haciendo posible búsquedas intermunicipales.
+  </p>
+
+  <x-media>
+    <img src="buscador.avif" alt="" width="4132" height="3356" />
+    <figcaption slot="caption">
+      Para el usuario es más cómodo refinar una búsqueda cuyos resultados ya
+      está viendo que ofrecerle todos los controles para ello antes de hacer la
+      búsqueda y obligarle a filtrar unos resultados que desconoce.
+    </figcaption>
+  </x-media>
+</x-entry>
