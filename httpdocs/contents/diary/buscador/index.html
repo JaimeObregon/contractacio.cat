@@ -1,6 +1,33 @@
 <h1>Buscador integral</h1>
 
 <x-entry>
+  <h1>Análisis</h1>
+
+  <p>
+    Se presentarán al usuario datos del total adjudicado al contratista y de la
+    distribución de este total entre los órganos de contratación.
+  </p>
+
+  <x-media>
+    <img src="analisis-1.avif" alt="" width="596" height="376" />
+    <img src="analisis-3.avif" alt="" width="596" height="376" />
+    <img src="analisis-4.avif" alt="" width="596" height="376" />
+    <figcaption slot="caption">
+      Ejemplo de tarjetas con información estadística de la relevancia del
+      contratista.
+    </figcaption>
+  </x-media>
+
+  <x-media>
+    <img src="analisis-2.avif" alt="" width="2398" height="938" />
+    <figcaption slot="caption">
+      Distribución del importe adjudicado a un contratista entre los diferentes
+      órganos de contratación.
+    </figcaption>
+  </x-media>
+</x-entry>
+
+<x-entry>
   <h1>Nombres de contratistas normalizados</h1>
 
   <p>
@@ -38,7 +65,7 @@
 </x-entry>
 
 <x-entry>
-  <h1>Filtrado contextual</h1>
+  <h1>Filtros contextuales</h1>
 
   <p>
     Los controles para ajustar la búsqueda que se han omitido de la interfaz
@@ -51,6 +78,15 @@
     realizada.
   </p>
 
+  <x-media>
+    <img src="buscador.avif" alt="" width="4132" height="3356" />
+    <figcaption slot="caption">
+      Para el usuario es más cómodo refinar una búsqueda cuyos resultados ya
+      está viendo que ofrecerle todos los controles para ello antes de hacer la
+      búsqueda y obligarle a filtrar unos resultados que desconoce.
+    </figcaption>
+  </x-media>
+
   <p>
     Por ejemplo, el control de rango (<i>slider</i>) para filtrar los contratos
     por su presupuesto económico presentará un valor mínimo y máximo coincidente
@@ -62,6 +98,13 @@
     Por ejemplo, si hay pocos resultados de búsqueda no se mostrarán controles
     para su filtrado.
   </p>
+
+  <x-media>
+    <img src="filtros.avif" alt="" width="2880" height="1630" />
+    <figcaption slot="caption">
+      Ejemplo de filtros sobre los resultados de la búsqueda.
+    </figcaption>
+  </x-media>
 </x-entry>
 
 <x-entry>
@@ -88,6 +131,38 @@
     coincidentes —que serán generalmente pocos— y después los contratos, más
     numerosos.
   </p>
+
+  <x-media>
+    <img src="resultados-mixtos.avif" alt="" width="2088" height="764" />
+    <figcaption slot="caption">
+      Nótese que los resultados muestran tanto contratos como contratistas y, de
+      ser necesario, órganos de contratación.
+    </figcaption>
+  </x-media>
+</x-entry>
+
+<x-entry>
+  <h1>La respuesta será rápida</h1>
+
+  <p>
+    Para que la experiencia de búsqueda sea satisfactoria, el servicio habrá de
+    arrojar resultados en tiempos cortos.
+  </p>
+
+  <p>
+    He comprobado con la base de datos de la estatal
+    <cite>Plataforma de Contratación del Sector Público</cite>
+    (<abbr>PLCSP</abbr>) que es posible devolver al usuario resultados de tiempo
+    real con una cadencia inferior a 400 milisegundos para la mayoría de las
+    búsquedas. Para esta prueba de concepto utilicé un clúster de Elasticsearch
+    en un entorno de producción. Serán probablemente posibles tiempos de
+    respuesta similares con otras arquitecturas.
+  </p>
+
+  <p>
+    El corpus de expedientes de contratación pública de Cataluña es un orden de
+    magnitud más pequeño que el de la <abbr>PLCSP</abbr>.
+  </p>
 </x-entry>
 
 <x-entry>
@@ -97,14 +172,18 @@
 
   <p>
     Esto incentivará al usuario a buscar más y refinar sus búsquedas, pues el
-    coste percibido de cada búsqueda se reduce drásticamente al evitarse la
+    coste percibido de cada búsqueda se reduce visiblemente al evitarse la
     pulsación de un botón de búsqueda y la recarga de la página.
   </p>
 
   <p>
-    He comprobado con la base de datos de la estatal Plataforma de Contratación
-    del Sector Público que es posible arrojar resultados de tiempo real con una
-    cadencia inferior a 400 milisegundos para la mayoría de las búsquedas.
+    Técnicamente, el programador implementará un
+    <a
+      href="https://stackoverflow.com/questions/24004791/what-is-the-debounce-function-in-javascript"
+      >mecanismo de <i>debounce</i></a
+    >
+    para que no se acumulen llamadas concurrentes cuando el usuario no ha
+    terminado aún de teclear su pesquisa.
   </p>
 
   <p>
@@ -129,11 +208,51 @@
 
   <p>
     En el momento de la carga de la página el campo recibirá automáticamente el
-    foco del teclado, invitando el cursor de texto intermitente al usuario a
+    foco del teclado. El cursor de texto intermitente invitará al usuario a
     teclear inmediatamente.
   </p>
 
-  <p>No habrá si quiera botón <q>Buscar</q>.</p>
+  <p>No habrá siquiera botón <q>Buscar</q>.</p>
+
+  <x-media>
+    <img src="contratosdecantabria.avif" alt="" width="4200" height="2908" />
+    <img src="gobiernodecantabria.avif" alt="" width="4200" height="2692" />
+    <figcaption slot="caption">
+      En
+      <a href="https://contratosdecantabria.es">contratosdecantabria.es</a> opté
+      por un único campo de entrada de texto, frente a la complejidad del
+      formulario del
+      <a
+        href="https://transparencia.cantabria.es/web/transparencia/consulta-contratos-gobierno"
+        >portal gubernamental</a
+      >
+      equivalente, que presenta al usuario un formulario con diez, más dos
+      botones. Ofrézcase el refinado de la búsqueda cuando hay resultados, no
+      antes.
+    </figcaption>
+  </x-media>
+</x-entry>
+
+<x-entry>
+  <h1>En una dirección recordable</h1>
+  <p>
+    Idealmente, estará desplegado en su propio dominio o, al menos, en un
+    subdominio. Y contará con una dirección URL
+    <strong>corta, pronunciable y recordable</strong>. Se evitarán las
+    abreviaturas. Por ejemplo:
+  </p>
+
+  <ul>
+    <li><code>contractacio.cat</code></li>
+    <li><code>contractes.gencat.cat</code></li>
+  </ul>
+
+  <p>
+    Nótese que la dirección del servicio es una parte relevante de la marca del
+    portal, que impacta en su <i>encontrabilidad</i> y la de los contratos, y
+    que forma parte visible de los enlaces que la ciudadanía compartirá en la
+    web, canales privados de mensajería o las redes sociales.
+  </p>
 </x-entry>
 
 <x-entry>
@@ -141,27 +260,23 @@
 
   <p>
     Se ofrecerá al usuario un único buscador de contratos, contratistas y
-    órganos de contratación de Cataluña. Este será el único punto de entrada a
-    la experiencia de búsqueda.
+    órganos de contratación de Cataluña. Este será el
+    <strong>punto de entrada único</strong> a los expedientes de contratación y
+    a la experiencia de búsqueda.
   </p>
 
   <p>
     Se abstraerán así para el ciudadano las particularidades internas a la
-    Administración que provocan la actual coexistencia del Registro Público de
-    Contratos y la Plataforma de Contratación.
+    Administración que provocan la actual coexistencia independiente del
+    <cite>Registro Público de Contratos</cite> y la
+    <cite>Plataforma de Contratación</cite>. Ello sin perjuicio de que, de
+    puertas a dentro de la Administración, sigan ambas coexistiendo durante un
+    tiempo como proyectos separados.
   </p>
 
   <p>
     Este buscador agregará los resultados de todos los órganos de contratación,
-    haciendo posible búsquedas intermunicipales.
+    haciendo posible búsquedas intermunicipales y el acceso horizontal a la
+    contratación de todos los organismos desde un único punto de acceso.
   </p>
-
-  <x-media>
-    <img src="buscador.avif" alt="" width="4132" height="3356" />
-    <figcaption slot="caption">
-      Para el usuario es más cómodo refinar una búsqueda cuyos resultados ya
-      está viendo que ofrecerle todos los controles para ello antes de hacer la
-      búsqueda y obligarle a filtrar unos resultados que desconoce.
-    </figcaption>
-  </x-media>
 </x-entry>
