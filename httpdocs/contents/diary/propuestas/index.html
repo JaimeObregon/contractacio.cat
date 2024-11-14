@@ -1,107 +1,632 @@
 <h1>Propuestas</h1>
 
 <x-entry>
-  <h1>Unificar la Plataforma y el Registro</h1>
+  <h1>Retitular las columnas de la tabla de licitaciones en trámites</h1>
 
   <p>
-    La <cite>Plataforma de Contratación</cite> y el
-    <cite>Registro de Contratos</cite> brindan acceso a dos conjuntos de datos
-    diferentes, con lo que actualmente
-    <strong
-      >la contratación pública de Cataluña está repartida entre dos servicios
-      digitales diferentes</strong
-    >.
+    Las columnas de la tabla de licitaciones en trámite no tienen títulos
+    descriptivos para humanos: <code>CODI_EXPEDIENT</code>,
+    <code>TIPUS_CONTRACTE</code>, <code>FASE_PUBLICACIO</code>,
+    <code>VALOR_ESTIMAT_CONTRACTE</code>…
   </p>
 
-  <p>
-    Existen razones de naturaleza administrativa para esta circunstancia, pero
-    algunos de nuestros usuarios<x-term href="marc"></x-term
-    ><x-term href="paula"></x-term> las deconocen. La Administración tiene su
-    lógica y sus complejidades, pero esta no debe trascender al ciudadano. Es la
-    Administración quien debe realizar el esfuerzo de adaptarse a la visión del
-    ciudadano, y no al revés.
-  </p>
+  <h2>Recomendación</h2>
+
+  <p>Titular las columnas de forma legible.</p>
 
   <x-media>
-    <img
-      src="plataforma.avif"
-      alt="Plataforma de Contratación"
-      width="943"
-      height="686"
-    />
-    <img
-      src="registro.avif"
-      alt="Registro de Contratos"
-      width="943"
-      height="686"
-    />
+    <img src="cabeceras.avif" alt="" width="2566" height="1782" />
     <figcaption slot="caption">
-      Los contratos públicos de Cataluña se publican en dos plataformas
-      diferentes: la Plataforma de Contratación y el Registro de Contratos. Esta
-      fragmentación dificulta el esfuerzo del usuario que puede llegar a uno
-      ignorando que existe también el otro.
+      Donde el usuario lee <q>TIPUS_CONTRACTE</q>, debería leerse <q>Tipo</q>. Y
+      así con el resto de columnas.
     </figcaption>
   </x-media>
+</x-entry>
+
+<x-entry>
+  <h1>Precargar los resultados</h1>
 
   <p>
-    Marc y Paula no conocen —y no tienen por qué— las especificidades de un
-    contrato menor.
+    La página que muestra la relación de contratos adjudicados en algunos
+    ayuntamiento contiene dos tablas. La paginación y reordenación de la primera
+    es instantánea, porque se precargan desde el servidor todos los resultados y
+    estas operaciones las realiza el navegador del usuario. En el caso de la
+    segunda, en cambio, la paginación, reordenación y filtrado puede llevar
+    varios segundos, porque estas operaciones se solicitan al servidor.
   </p>
 
-  <ul>
-    <li>
-      <p>
-        Marc<x-term href="marc"></x-term> está investigando las adjudicaciones a
-        un contratista, pero en la Plataforma no obtiene la fotografía completa.
-        Acude al Registro para ampliar sus datos, pero ahora debe conciliar los
-        resultados de ambos portales, lo que le supone un esfuerzo adicional.
-        Marc no entiende por qué no hay un
-        <strong>punto de acceso único</strong>
-        desde el que explorar todas las compras públicas de Cataluña.
-      </p>
-    </li>
-    <li>
-      <p>
-        Paula<x-term href="paula"></x-term> ha hecho una búsqueda en internet y
-        ha llegado a la Plataforma, pero ignora (<i>discoverability</i>) que,
-        para tener una visión completa, debe consultar además el Registro.
-        Obtiene resultados pero no encuentra algunos contratos que, en cambio,
-        sí lee en un canal de Telegram con bulos y desinformación. Ello le hace
-        pensar que algo está siendo ocultado, lo que refuerza la sensación de
-        opacidad y conspiración que difunde el canal social al que se ha
-        suscrito. Paula ignora que además de la Plataforma, existe también el
-        Registro.
-      </p>
-    </li>
-  </ul>
-
   <p>
-    Publicar los contratos repartidos entre la Plataforma y el Registro
-    dificulta a todos los usuarios obtener una visión de conjunto de, por
-    ejemplo, el volumen de negocio de un contratista con los organismos
-    públicos.
+    Desde el punto de vista del usuario es más conveniente precargar todos los
+    resultados desde el servidor una única vez y cachearlos para evitar
+    descargas redundantes. Esto, sin embargo puede ser desaconsejable si el
+    volumen de datos es muy grande.
   </p>
 
   <h2>Recomendación</h2>
 
   <p>
-    Recomiendo <strong>unificar la Plataforma y el Registro</strong> en un único
-    servicio digital. Esto, además de satisfacer las expectativas de los
-    usuarios menos familiarizados con la lógica de la Administración, redudicía
-    los costes de mantenimiento de operación y la fricción de todos los
-    usuarios, también los que acceden desde los organismos públicos<x-term
-      href="mireia"
-    ></x-term
-    >.
+    Recomiendo precargar todos los datos desde el servidor y realizar las
+    operaciones de ordenación, paginación y filtrado en el navegador. Los datos
+    <abbr>JSON</abbr> descargados tienen una razón de compresión de en torno al
+    85&nbsp;% si Brotli o gzip están habilitados en el servidor, lo que reduce
+    drásticamente el ancho de banda y el timpo de descarga. Por otro lado, el
+    documento <abbr>JSON</abbr>
+    contiene datos que aparentemente no son mostrados en las tablas, y que
+    podrían quitarse para reducir el volumen de los datos.
+  </p>
+
+  <x-media>
+    <img src="json.avif" alt="" width="3032" height="1448" />
+    <figcaption slot="caption">
+      El documento <abbr>JSON</abbr> solicitado al servidor contiene campos
+      voluminosos que no son mostrados en las tablas, y probablemente podrían
+      eliminarse para reducir el volumen de los datos a precargar.
+    </figcaption>
+  </x-media>
+</x-entry>
+
+<x-entry>
+  <h1>Ocultar las secuencias de control</h1>
+
+  <p>
+    Es frecuente que la descripción del objeto de un contrato contenga saltos de
+    línea, retornos de carro o tabulaciones. Actualmente estás secuencias de
+    control del flujo del texto se están mostrando en la interfaz de usuario
+    como
+    <code>\n</code>, <code>\r</code> o <code>\t</code>.
+  </p>
+
+  <x-media>
+    <img src="secuencias-de-control.avif" alt="" width="2472" height="1238" />
+    <figcaption slot="caption">
+      Omitir las secuencias de control es sencillo y mejoraría la legibilidad.
+    </figcaption>
+  </x-media>
+
+  <h2>Recomendación</h2>
+
+  <p>
+    Reemplazar por espacios las secuencias <code>\n</code>, <code>\r</code> y
+    <code>\t</code> —entre quizá otras— antes de enviarlas a la interfaz de
+    usuario.
+  </p>
+</x-entry>
+
+<x-entry>
+  <h1>No mostrar al usuario direcciones <abbr>URL</abbr></h1>
+
+  <p>
+    Las direcciones <abbr>URL</abbr> son un identificador técnico de un recurso
+    en línea. Cada recurso —e, idealmente, cada estado significativo de la
+    interfaz de usuario— ha de disponer de una dirección <abbr>URL</abbr> única.
+    El usuario ha de poder consultarla en las barras de direcciones y de estado
+    de su navegador, pero se considera una buena práctica no mostrarlas
+    directamente como un dato en la interfaz.
   </p>
 
   <p>
-    Tal integración, sin embargo, no parece inmediata. El desacoplamiento (<i
-      >impedance mismatch</i
-    >) entre los modelos de datos de la Plataforma y el Registro provoca que una
-    mera agregación sea inviable. Los costes de tal unificación —si bien podrían
-    estudiarse— y otras fricciones interadministrativas probablemente obliguen a
-    postergar esta acción.
+    Las direcciones <abbr>URL</abbr> pueden ser largas y crípticas, y amedrentar
+    a algunos de nuestros usuarios<x-term href="paula"></x-term> o provocar su
+    desconfianza.
+  </p>
+
+  <blockquote>
+    <p>
+      Modificaciones de contratos:<br />
+      <a
+        href="http://www.manresa.cat/web/article/6073-modificacions-de-contractes"
+        >http://www.manresa.cat/web/article/6073-modificacions-de-contractes</a
+      >
+    </p>
+  </blockquote>
+
+  <x-media>
+    <img src="url-1.avif" alt="" width="2386" height="1592" />
+    <img src="url-2.avif" alt="" width="2386" height="1592" />
+    <figcaption slot="caption">…</figcaption>
+  </x-media>
+
+  <h2>Recomendación</h2>
+
+  <p>
+    Recomiendo sustituir las direcciones <abbr>URL</abbr> visibles en la
+    interfaz de usuario por un texto descriptivo del recurso al que enlazan.
+    Seguirán siendo interactivas, pero más legibles.
+  </p>
+
+  <blockquote>
+    <p>
+      Véanse las
+      <a
+        href="http://www.manresa.cat/web/article/6073-modificacions-de-contractes"
+        >modificaciones de contratos</a
+      >
+      en el portal del Ayuntamiento.
+    </p>
+  </blockquote>
+</x-entry>
+
+<x-entry>
+  <h1>Hacer enlazables los contratos</h1>
+
+  <p>
+    Los contratos públicos se presentan actualmente al ciudadano en una tabla
+    ordenable, cada una de cuyas filas contiene un pictograma que, al ser tocado
+    o pinchado, abre una ventana modal con los detalles del expediente.
+  </p>
+
+  <x-media>
+    <img src="otro-listado-mas.avif" alt="" width="2378" height="1272" />
+    <figcaption slot="caption">
+      Las actuales tablas de resultados y los pictogramas que abren el detalle
+      de cada una.
+    </figcaption>
+  </x-media>
+
+  <p>
+    Sin embargo, la implementación de este mecanismo modal no proporciona una
+    dirección <abbr>URL</abbr> unívoca a cada contrato. Esto, en la práctica,
+    <strong
+      >impide a los usuarios enlazar, compartir o guardar un contrato</strong
+    >
+    en sus marcadores.
+  </p>
+
+  <x-media>
+    <img src="modal.avif" alt="" width="2378" height="1382" />
+    <figcaption slot="caption">
+      La ventana modal que se abre con la información detallada de un contrato.
+    </figcaption>
+  </x-media>
+
+  <h2>Recomendación</h2>
+
+  <p>
+    Recomiendo asignar a cada contrato una dirección <abbr>URL</abbr> única, a
+    ser posible corta, que presente automáticamente la ventana modal con los
+    detalles del contrato al ser abierta por un navegador. Esto permitirá a los
+    usuarios guardar y compartir contratos.
+  </p>
+
+  <x-media>
+    <img src="contratosdecantabria.avif" alt="" width="2386" height="1592" />
+    <figcaption slot="caption">
+      En
+      <a href="https://contratosdecantabria.es">contratosdecantabria.es</a> cada
+      contrato tiene una dirección <abbr>URL</abbr> única, que el usuario puede
+      copiar y compartir.
+    </figcaption>
+  </x-media>
+</x-entry>
+
+<x-entry>
+  <h1>Mostrar los estados como procesos</h1>
+
+  <p>
+    La contratación pública es un proceso, y durante su ciclo de vida los
+    contratos transitan por varios estados: como mínimo la licitación se
+    anuncia, el contrato se adjudica y finalmente se formaliza.
+  </p>
+
+  <p>
+    El ciudadano al que nos dirigimos<x-term href="marc"></x-term
+    ><x-term href="paula"></x-term> frecuentemente desconoce estas
+    complejidades, motivo por el cual puede ser útil informarle del estado del
+    contrato en el contexto del proceso de contratación.
+  </p>
+
+  <x-media>
+    <img src="detalle.avif" alt="" width="1660" height="1124" />
+    <figcaption slot="caption">
+      Los portales de contratación actuales solo informan de la fase.
+    </figcaption>
+  </x-media>
+
+  <h2>Recomendación</h2>
+
+  <p>
+    Recomiendo presentar la información del estado del contrato en el contexto
+    del proceso de contratación.
+  </p>
+
+  <x-media>
+    <img src="proceso.avif" alt="" width="918" height="324" />
+    <figcaption slot="caption">
+      Aunque el ciclo de vida del contrato puede ser más complejo y contener más
+      fases, esta representación proporciona al usuario una información mejor
+      contextualizada de la fase en la que se encuentra el contrato y lo que
+      está por venir.
+    </figcaption>
+  </x-media>
+</x-entry>
+
+<x-entry>
+  <h1>Evitar las etiquetas cuando sea posible</h1>
+
+  <p>
+    La presentación columnar en forma <q>etiqueta: dato</q>, tradicional de la
+    representación de modelos de datos, resulta artificiosa en las interfaces de
+    usuario.
+  </p>
+
+  <blockquote>
+    <p>
+      Contrato: <strong>menor</strong><br />
+      Tipo: <strong>servicios</strong><br />
+      Adjudicatario: <strong>ACME, S. A.</strong><br />
+      Duración: <strong>1 mes y 9 días</strong><br />
+      Importe: <strong>123.456 €</strong>
+    </p>
+  </blockquote>
+
+  <p>
+    Muchas de estas etiquetas, además, son omitibles porque
+    <strong>el dato ya revela su propia naturaleza</strong>.
+  </p>
+
+  <h2>Recomendación</h2>
+
+  <p>
+    Recomiendo emplear proposiciones y conectores lingüísticos para construir
+    frases naturales con los datos, evitando —cuando sea posible— la forma
+    <q>etiqueta: dato</q>.
+  </p>
+
+  <blockquote>
+    <p>
+      Contrato <strong>menor</strong> de <strong>servicios</strong> —
+      <strong>1 mes y 9 días</strong> de duración<br />
+      Adjudicado a <strong>ACME, S.A</strong> por
+      <strong>123.456 €</strong>
+    </p>
+  </blockquote>
+
+  <p>
+    Esto ha de abordarse atendiendo a la naturaleza multilingüe de los portales
+    de contratación y conectando los datos con conectores comunes a plurales y
+    singulares.
+  </p>
+
+  <x-media>
+    <img src="listado.avif" alt="" width="943" height="686" />
+    <figcaption slot="caption">
+      Un ejemplo de lista de resultados que evita las tablas y conecta los datos
+      para construir frases naturales que mejoran la legibilidad.
+    </figcaption>
+  </x-media>
+</x-entry>
+
+<x-entry>
+  <h1>No tabular datos no tabulares</h1>
+
+  <p>
+    Tradicionalmente los programadores hemos abusado de las tablas como
+    contenedor visual para presentar datos al usuario. Seguramente porque los
+    registros de las bases de datos relacionales se reúnen en un contenedor
+    lógico también denominado tabla.
+  </p>
+
+  <p>
+    Pero las tablas como contenedor lógico no tienen que ver con las tablas como
+    componente presentacional. En el diseño de interfaces de usuario
+    <strong
+      >las tablas solo son adecuadas para datos de naturaleza tabular</strong
+    >. Y los contratos públicos encajan muy mal en esta definición, tal como se
+    aprecia en las siguientes capturas de pantalla.
+  </p>
+
+  <x-media>
+    <img src="tabla-1.avif" alt="" width="943" height="686" />
+    <img src="tabla-2.avif" alt="" width="943" height="686" />
+    <figcaption slot="caption">
+      Cuando presentamos en tablas datos de naturaleza no tabular la densidad de
+      información y la legibilidad se degradan.
+    </figcaption>
+  </x-media>
+
+  <p>
+    En la implementación actual, hay tantas columnas (19), que no caben. Esto
+    fuerza al usuario a realizar
+    <strong
+      >un incómodo y no evidente desplazamiento (<i>scroll</i>)
+      horizontal</strong
+    >. El aprovechamiento de la superficie útil de pantalla es asímismo pobre,
+    pues la mayoría de las celdas contienen grandes cantidades de espacio libre,
+    mientras que las columnas con mucho texto, como
+    <q>Descripción del expediente</q> o <q>Contrato</q>, no caben y se ven
+    forzadas a una estrechez prácticamente imposible.
+  </p>
+
+  <x-media>
+    <img src="tabla.avif" alt="" width="943" height="686" />
+    <figcaption slot="caption">
+      Otro ejemplo actual, menos dramático, de resultados en forma tabular.
+      Nótese cómo las celdas de la tercera columna se presentan elididas porque
+      no caben, mientras que todas las demás, en cambio, gozan de espacio
+      sobrante.
+    </figcaption>
+  </x-media>
+
+  <h2>Recomendación</h2>
+
+  <p>
+    Recomiendo descartar las tablas para maquetar listas de contratos, y adoptar
+    en su lugar listas o cajas. Y mostrar en estos resultados solo los datos más
+    relevantes de cada contrato, presentando todos solo cuando el usuario abre
+    la vista detallada de uno.
+  </p>
+
+  <x-media>
+    <img src="otro-listado.avif" alt="" width="943" height="686" />
+    <figcaption slot="caption">
+      Rediseñando el caso anterior como una lista se mejora la legibilidad de la
+      información y se evitan la mayoría de las elisiones, sin pérdida de
+      información. Nótese cómo se crea una jerarquía visual empleando el tamaño
+      y el contraste, la adición de pictogramas y el ergonómico aumento del área
+      activa de los resultados, en azul.
+    </figcaption>
+  </x-media>
+</x-entry>
+
+<x-entry>
+  <h1>Omitir los decimales y la divisa en las celdas de resultados</h1>
+
+  <p>
+    Los céntimos de euro no son significativos para el usuario, y sustraen un
+    espacio importante en las reducidas celdas de las tablas de resultados.
+    Igualemente el símbolo del euros es redundante y puede explicitarse una
+    única vez en la cabecera de la columna, no en cada celda.
+  </p>
+
+  <p>
+    Como se aprecia en las imágenes adjuntas, esto reduce la cantidad de
+    información superflua en la tabla, mejora la legibilidad de los importes y
+    reduce la carga cognitiva en el usuario.
+  </p>
+
+  <x-media>
+    <img src="con-decimales.avif" alt="" width="943" height="686" />
+    <img src="sin-decimales.avif" alt="" width="943" height="686" />
+    <figcaption slot="caption">
+      Omitamos los decimales y la divisa para facilitar la legibilidad de los
+      importes.
+    </figcaption>
+  </x-media>
+
+  <p>
+    Los céntimos de euros sí deben mostrarse, em cambio, en la página dedicada a
+    cada contrato, donde no existen las limitaciones de espacio impuestas por la
+    estructura tabular.
+  </p>
+
+  <h2>Recomendación</h2>
+
+  <p>
+    Redondear al euro, en las tablas de resultados, todos los importes
+    económicos. Y quitar el símbolo del euro, por redundante, sustituyéndolo por
+    una mención en la cabecera de la columna.
+  </p>
+</x-entry>
+
+<x-entry>
+  <h1>Elidir correctamente el objeto de los contratos</h1>
+
+  <p>
+    Los contratos son mostrados al ciudadano en tablas, pero no todas las
+    columnas alojan el mismo tipo de contenido. Años, importes o códigos de
+    expediente son datos breves que se adaptan bien a una estructura tabular. El
+    objeto de un contrato, por el contrario, es texto mucho más extenso, que en
+    algunos casos puede llegar a contar con cientos de palabras.
+  </p>
+
+  <p>
+    Para limitar la extensión del objeto de los contratos a lo que
+    razonablemente cabe en una celda de una tabla, se eliden yuxtaponiendo unos
+    puntos suspensivos.
+  </p>
+
+  <p>
+    Pero la elipsis se está haciendo cortando drásticamente a partir del 150º
+    caracter. Esto provoca que las celdas tengan una altura desigual (algunas
+    tienen tres, y otras cuatro líneas). Y que la elisión y los puntos
+    suspensivos queden en posiciones arbitrarias donde cabría más texto. El
+    programador no puede controlarlo.
+  </p>
+
+  <x-media>
+    <img src="elisiones.avif" alt="" width="943" height="686" />
+    <figcaption slot="caption">
+      El objeto de los contratos queda truncado de forma poco natural. Esto
+      puede resolverse con una simple propiedad <abbr>CSS</abbr>.
+    </figcaption>
+  </x-media>
+
+  <h2>Recomendación</h2>
+
+  <p>
+    Utilizar la propiedad <abbr>CSS</abbr> <code>line-clamp</code>, que resuelve
+    elegante y simplemente este problema. Véase
+    <a href="https://codepen.io/gareth53/pen/AwbQyO">este ejemplo</a> en
+    CodePen.
+  </p>
+</x-entry>
+
+<x-entry>
+  <h1>Emplear formatos vectoriales para las marcas</h1>
+
+  <p>
+    La imagen institucional es uno de los elementos más sensibles del diseño de
+    un servicio público digital. Sin embargo, es también uno de los elementos
+    más maltratados y desatendidos. Y es difícil transmitir al ciudadano una
+    imagen de respeto y profesionalidad cuando el emblema mismo del organismo
+    público es un mapa de bits borroso por una mala compresión.
+  </p>
+
+  <p>
+    Agrava esta situación la popularización, en los últimos años, de las
+    pantallas de alta densidad de píxeles.
+  </p>
+
+  <p>
+    <strong
+      >Los pictogramas y marcas deben mostrase en formatos vectoriales
+      (<abbr>SVG</abbr>)</strong
+    >. A diferencia de los formatos de mapa de bits, los gráficos vectoriales se
+    aprecian con calidad y nitidez a cualquier resolución y en cualquier
+    pantalla.
+  </p>
+
+  <p>
+    El emblema de la Generalitat de Catalunya es un mapa de bits tanto en la
+    cabecera como en el pie de página del Registro, pero en cambio se muestra en
+    forma vectorial al pie de la Plataforma.
+  </p>
+
+  <x-media>
+    <img src="logo-aoc.avif" alt="" width="943" height="686" />
+    <img src="registro-logo-1.avif" alt="" width="943" height="686" />
+    <img src="registro-logo-2.avif" alt="" width="943" height="686" />
+    <img src="plataforma-logo.avif" alt="" width="943" height="686" />
+    <figcaption slot="caption">
+      Los logos de <abbr>AOC</abbr> y la Unión Europea; el emblema de la
+      Generalitat, ampliado, en la cabecera y el pie del Registro; y en el pie
+      de la Plataforma. Nótese la falta de definición de los tres primeros
+      (mapas de bits) frente al tercero (vectorial).
+    </figcaption>
+  </x-media>
+
+  <h2>Recomendación</h2>
+
+  <p>
+    Utilizar siempre gráficos <abbr>SVG</abbr> para marcas, logos y pictogramas.
+  </p>
+</x-entry>
+
+<x-entry>
+  <h1>Mostrar primero los contratos más recientes</h1>
+
+  <p>
+    No parece equivocado pensar que, en general,
+    <strong>el interés de un contrato decrece con el tiempo</strong>. Y que los
+    resultados de las búsquedas tienen para nuestros usuarios más valor cuanto
+    más actuales.
+  </p>
+
+  <p>
+    El argumento contrario también parece razonable: los contratos antiguos
+    tienen un interés más histórico o referencial que comercial<x-term
+      href="joan"
+    ></x-term
+    ><x-term href="mireia"></x-term> o informativo<x-term href="marc"></x-term
+    ><x-term href="paula"></x-term>.
+  </p>
+
+  <p>
+    Sin embargo, los primeros resultados de la tabla de contratos en el portal
+    de transparencia muestra de manera predeterminada los contratos más antiguos
+    de la base de datos. Contratos que hace años que fueron adjudicados y
+    ejecutados. Esto obliga al usuario a avanzar manualmente hasta la última
+    página para encontrar los expedientes más recientes.
+  </p>
+
+  <x-media>
+    <img src="cronologia.webp" alt="" width="943" height="686" />
+    <figcaption slot="caption">
+      Actualmente se muestran de manera predeterminada contratos que llevan años
+      adjudicados y ejecutados.
+    </figcaption>
+  </x-media>
+
+  <h2>Recomendación</h2>
+
+  <p>
+    Cuando existan tablas de contratos, recomiendo mostrar los contratos en
+    orden cronológico inverso: primero los que más recientemente han sido
+    publicados, licitados, adjudicados, formalizados o modificados.
+  </p>
+</x-entry>
+
+<x-entry>
+  <h1>Utilizar coherentemente las tablas</h1>
+
+  <p>
+    Al menos en el
+    <a
+      href="https://seu-e.cat/ca/web/manresa/govern-obert-i-transparencia/contractes-convenis-i-subvencions/relacio-de-contractes/relacio-de-contractes-adjudicats-historics"
+      >portal de transparencia de Manresa</a
+    >, los botones de descarga y acceso a los datos aparecen aparentemente
+    duplicados.
+  </p>
+
+  <p>
+    Quizá la primera fila de botones se refiere a la primera tabla de contratos;
+    y la segunda fila de botones, a la segunda tabla. Pero
+    <strong>esto no es evidente para el usuario</strong>. Y supone una
+    redundancia, además, antiestética. Por otro lado, representa una
+    incoherencia de diseño (<i>design inconsistency</i>), por cuanto, sin que
+    exista una razón clara, una tabla presenta sus acciones de descarga debajo y
+    la otra, en cambio, justo encima.
+  </p>
+
+  <x-media>
+    <img src="doble-botonera.avif" alt="" width="943" height="686" />
+    <figcaption slot="caption">
+      A los ojos del usuario recién llegado, los botones para descargar y
+      acceder a los datos parecen repetidos.
+    </figcaption>
+  </x-media>
+
+  <p>
+    La incoherencia puede confundir y sorprender al usuario. Y, además, se
+    extiende también —entre otros— a la posición de los controles de paginación,
+    que están encima de la primera tabla pero debajo de la segunda. Y al filtro
+    de resultados, que —al menos para el citado caso de Manresa— solo existe en
+    la segunda tabla.
+  </p>
+
+  <h2>Recomendación</h2>
+
+  <p>
+    Aplicar
+    <a href="https://es.wikipedia.org/wiki/Principio_de_la_m%C3%ADnima_sorpresa"
+      >el principio de mínima sorpresa</a
+    >
+    y realizar los cambios necesarios para que los elementos análogos de la
+    interfaz de usuario —en este caso, las tablas de contratos— se comporten de
+    manera igualmente análoga.
+  </p>
+</x-entry>
+
+<x-entry>
+  <h1>Corregir el enlace roto a la descarga de datos</h1>
+
+  <p>
+    Existe en el producto digital de <abbr>AOC</abbr> para los portales de
+    transparencia de los ayuntamientos un enlace para la descarga de todos los
+    datos. Pero <strong>está roto y lleva a una página de error 404</strong>.
+  </p>
+
+  <x-media>
+    <img src="enlace-roto-1.webp" alt="" width="943" height="686" />
+    <img src="enlace-roto-2.webp" alt="" width="943" height="686" />
+    <figcaption slot="caption">
+      Hay un enlace roto en el botón <q>Accede a todos los datos</q> de la
+      sección <q>Relación de contratos adjudicados (históricos)</q> del
+      <a
+        href="https://seu-e.cat/ca/web/castellardelvalles/govern-obert-i-transparencia/contractes-convenis-i-subvencions/relacio-de-contractes/relacio-de-contractes-adjudicats-historics"
+        >portal de transparencia de Castellar del Vallès</a
+      >. Este error se da también en la misma sección de otros ayuntamientos.
+    </figcaption>
+  </x-media>
+
+  <h2>Recomendación</h2>
+
+  <p>
+    Corregir el enlace roto. E, idealmente,
+    <strong>integrar una herramienta de monitorización de excepciones</strong>
+    como <a href="https://sentry.io/">Sentry</a>, lo que permetiría detectar
+    este problema y otros errores que impactan negativamente en la experiencia
+    de usuario tan pronto como se producen.
   </p>
 </x-entry>
 
@@ -212,631 +737,106 @@
 </x-entry>
 
 <x-entry>
-  <h1>Corregir el enlace roto a la descarga de datos</h1>
+  <h1>Unificar la Plataforma y el Registro</h1>
 
   <p>
-    Existe en el producto digital de <abbr>AOC</abbr> para los portales de
-    transparencia de los ayuntamientos un enlace para la descarga de todos los
-    datos. Pero <strong>está roto y lleva a una página de error 404</strong>.
+    La <cite>Plataforma de Contratación</cite> y el
+    <cite>Registro de Contratos</cite> brindan acceso a dos conjuntos de datos
+    diferentes, con lo que actualmente
+    <strong
+      >la contratación pública de Cataluña está repartida entre dos servicios
+      digitales diferentes</strong
+    >.
+  </p>
+
+  <p>
+    Existen razones de naturaleza administrativa para esta circunstancia, pero
+    algunos de nuestros usuarios<x-term href="marc"></x-term
+    ><x-term href="paula"></x-term> las deconocen. La Administración tiene su
+    lógica y sus complejidades, pero esta no debe trascender al ciudadano. Es la
+    Administración quien debe realizar el esfuerzo de adaptarse a la visión del
+    ciudadano, y no al revés.
   </p>
 
   <x-media>
-    <img src="enlace-roto-1.webp" alt="" width="943" height="686" />
-    <img src="enlace-roto-2.webp" alt="" width="943" height="686" />
+    <img
+      src="plataforma.avif"
+      alt="Plataforma de Contratación"
+      width="943"
+      height="686"
+    />
+    <img
+      src="registro.avif"
+      alt="Registro de Contratos"
+      width="943"
+      height="686"
+    />
     <figcaption slot="caption">
-      Hay un enlace roto en el botón <q>Accede a todos los datos</q> de la
-      sección <q>Relación de contratos adjudicados (históricos)</q> del
-      <a
-        href="https://seu-e.cat/ca/web/castellardelvalles/govern-obert-i-transparencia/contractes-convenis-i-subvencions/relacio-de-contractes/relacio-de-contractes-adjudicats-historics"
-        >portal de transparencia de Castellar del Vallès</a
-      >. Este error se da también en la misma sección de otros ayuntamientos.
-    </figcaption>
-  </x-media>
-
-  <h2>Recomendación</h2>
-
-  <p>
-    Corregir el enlace roto. E, idealmente,
-    <strong>integrar una herramienta de monitorización de excepciones</strong>
-    como <a href="https://sentry.io/">Sentry</a>, lo que permetiría detectar
-    este problema y otros errores que impactan negativamente en la experiencia
-    de usuario tan pronto como se producen.
-  </p>
-</x-entry>
-
-<x-entry>
-  <h1>Utilizar coherentemente las tablas</h1>
-
-  <p>
-    Al menos en el
-    <a
-      href="https://seu-e.cat/ca/web/manresa/govern-obert-i-transparencia/contractes-convenis-i-subvencions/relacio-de-contractes/relacio-de-contractes-adjudicats-historics"
-      >portal de transparencia de Manresa</a
-    >, los botones de descarga y acceso a los datos aparecen aparentemente
-    duplicados.
-  </p>
-
-  <p>
-    Quizá la primera fila de botones se refiere a la primera tabla de contratos;
-    y la segunda fila de botones, a la segunda tabla. Pero
-    <strong>esto no es evidente para el usuario</strong>. Y supone una
-    redundancia, además, antiestética. Por otro lado, representa una
-    incoherencia de diseño (<i>design inconsistency</i>), por cuanto, sin que
-    exista una razón clara, una tabla presenta sus acciones de descarga debajo y
-    la otra, en cambio, justo encima.
-  </p>
-
-  <x-media>
-    <img src="doble-botonera.avif" alt="" width="943" height="686" />
-    <figcaption slot="caption">
-      A los ojos del usuario recién llegado, los botones para descargar y
-      acceder a los datos parecen repetidos.
+      Los contratos públicos de Cataluña se publican en dos plataformas
+      diferentes: la Plataforma de Contratación y el Registro de Contratos. Esta
+      fragmentación dificulta el esfuerzo del usuario que puede llegar a uno
+      ignorando que existe también el otro.
     </figcaption>
   </x-media>
 
   <p>
-    La incoherencia puede confundir y sorprender al usuario. Y, además, se
-    extiende también —entre otros— a la posición de los controles de paginación,
-    que están encima de la primera tabla pero debajo de la segunda. Y al filtro
-    de resultados, que —al menos para el citado caso de Manresa— solo existe en
-    la segunda tabla.
+    Marc y Paula no conocen —y no tienen por qué— las especificidades de un
+    contrato menor.
+  </p>
+
+  <ul>
+    <li>
+      <p>
+        Marc<x-term href="marc"></x-term> está investigando las adjudicaciones a
+        un contratista, pero en la Plataforma no obtiene la fotografía completa.
+        Acude al Registro para ampliar sus datos, pero ahora debe conciliar los
+        resultados de ambos portales, lo que le supone un esfuerzo adicional.
+        Marc no entiende por qué no hay un
+        <strong>punto de acceso único</strong>
+        desde el que explorar todas las compras públicas de Cataluña.
+      </p>
+    </li>
+    <li>
+      <p>
+        Paula<x-term href="paula"></x-term> ha hecho una búsqueda en internet y
+        ha llegado a la Plataforma, pero ignora (<i>discoverability</i>) que,
+        para tener una visión completa, debe consultar además el Registro.
+        Obtiene resultados pero no encuentra algunos contratos que, en cambio,
+        sí lee en un canal de Telegram con bulos y desinformación. Ello le hace
+        pensar que algo está siendo ocultado, lo que refuerza la sensación de
+        opacidad y conspiración que difunde el canal social al que se ha
+        suscrito. Paula ignora que además de la Plataforma, existe también el
+        Registro.
+      </p>
+    </li>
+  </ul>
+
+  <p>
+    Publicar los contratos repartidos entre la Plataforma y el Registro
+    dificulta a todos los usuarios obtener una visión de conjunto de, por
+    ejemplo, el volumen de negocio de un contratista con los organismos
+    públicos.
   </p>
 
   <h2>Recomendación</h2>
 
   <p>
-    Aplicar
-    <a href="https://es.wikipedia.org/wiki/Principio_de_la_m%C3%ADnima_sorpresa"
-      >el principio de mínima sorpresa</a
-    >
-    y realizar los cambios necesarios para que los elementos análogos de la
-    interfaz de usuario —en este caso, las tablas de contratos— se comporten de
-    manera igualmente análoga.
-  </p>
-</x-entry>
-
-<x-entry>
-  <h1>Mostrar primero los contratos más recientes</h1>
-
-  <p>
-    No parece equivocado pensar que, en general,
-    <strong>el interés de un contrato decrece con el tiempo</strong>. Y que los
-    resultados de las búsquedas tienen para nuestros usuarios más valor cuanto
-    más actuales.
-  </p>
-
-  <p>
-    El argumento contrario también parece razonable: los contratos antiguos
-    tienen un interés más histórico o referencial que comercial<x-term
-      href="joan"
+    Recomiendo <strong>unificar la Plataforma y el Registro</strong> en un único
+    servicio digital. Esto, además de satisfacer las expectativas de los
+    usuarios menos familiarizados con la lógica de la Administración, redudicía
+    los costes de mantenimiento de operación y la fricción de todos los
+    usuarios, también los que acceden desde los organismos públicos<x-term
+      href="mireia"
     ></x-term
-    ><x-term href="mireia"></x-term> o informativo<x-term href="marc"></x-term
-    ><x-term href="paula"></x-term>.
+    >.
   </p>
 
   <p>
-    Sin embargo, los primeros resultados de la tabla de contratos en el portal
-    de transparencia muestra de manera predeterminada los contratos más antiguos
-    de la base de datos. Contratos que hace años que fueron adjudicados y
-    ejecutados. Esto obliga al usuario a avanzar manualmente hasta la última
-    página para encontrar los expedientes más recientes.
+    Tal integración, sin embargo, no parece inmediata. El desacoplamiento (<i
+      >impedance mismatch</i
+    >) entre los modelos de datos de la Plataforma y el Registro provoca que una
+    mera agregación sea inviable. Los costes de tal unificación —si bien podrían
+    estudiarse— y otras fricciones interadministrativas probablemente obliguen a
+    postergar esta acción.
   </p>
-
-  <x-media>
-    <img src="cronologia.webp" alt="" width="943" height="686" />
-    <figcaption slot="caption">
-      Actualmente se muestran de manera predeterminada contratos que llevan años
-      adjudicados y ejecutados.
-    </figcaption>
-  </x-media>
-
-  <h2>Recomendación</h2>
-
-  <p>
-    Cuando existan tablas de contratos, recomiendo mostrar los contratos en
-    orden cronológico inverso: primero los que más recientemente han sido
-    publicados, licitados, adjudicados, formalizados o modificados.
-  </p>
-</x-entry>
-
-<x-entry>
-  <h1>Emplear formatos vectoriales para las marcas</h1>
-
-  <p>
-    La imagen institucional es uno de los elementos más sensibles del diseño de
-    un servicio público digital. Sin embargo, es también uno de los elementos
-    más maltratados y desatendidos. Y es difícil transmitir al ciudadano una
-    imagen de respeto y profesionalidad cuando el emblema mismo del organismo
-    público es un mapa de bits borroso por una mala compresión.
-  </p>
-
-  <p>
-    Agrava esta situación la popularización, en los últimos años, de las
-    pantallas de alta densidad de píxeles.
-  </p>
-
-  <p>
-    <strong
-      >Los pictogramas y marcas deben mostrase en formatos vectoriales
-      (<abbr>SVG</abbr>)</strong
-    >. A diferencia de los formatos de mapa de bits, los gráficos vectoriales se
-    aprecian con calidad y nitidez a cualquier resolución y en cualquier
-    pantalla.
-  </p>
-
-  <p>
-    El emblema de la Generalitat de Catalunya es un mapa de bits tanto en la
-    cabecera como en el pie de página del Registro, pero en cambio se muestra en
-    forma vectorial al pie de la Plataforma.
-  </p>
-
-  <x-media>
-    <img src="logo-aoc.avif" alt="" width="943" height="686" />
-    <img src="registro-logo-1.avif" alt="" width="943" height="686" />
-    <img src="registro-logo-2.avif" alt="" width="943" height="686" />
-    <img src="plataforma-logo.avif" alt="" width="943" height="686" />
-    <figcaption slot="caption">
-      Los logos de <abbr>AOC</abbr> y la Unión Europea; el emblema de la
-      Generalitat, ampliado, en la cabecera y el pie del Registro; y en el pie
-      de la Plataforma. Nótese la falta de definición de los tres primeros
-      (mapas de bits) frente al tercero (vectorial).
-    </figcaption>
-  </x-media>
-
-  <h2>Recomendación</h2>
-
-  <p>
-    Utilizar siempre gráficos <abbr>SVG</abbr> para marcas, logos y pictogramas.
-  </p>
-</x-entry>
-
-<x-entry>
-  <h1>Elidir correctamente el objeto de los contratos</h1>
-
-  <p>
-    Los contratos son mostrados al ciudadano en tablas, pero no todas las
-    columnas alojan el mismo tipo de contenido. Años, importes o códigos de
-    expediente son datos breves que se adaptan bien a una estructura tabular. El
-    objeto de un contrato, por el contrario, es texto mucho más extenso, que en
-    algunos casos puede llegar a contar con cientos de palabras.
-  </p>
-
-  <p>
-    Para limitar la extensión del objeto de los contratos a lo que
-    razonablemente cabe en una celda de una tabla, se eliden yuxtaponiendo unos
-    puntos suspensivos.
-  </p>
-
-  <p>
-    Pero la elipsis se está haciendo cortando drásticamente a partir del 150º
-    caracter. Esto provoca que las celdas tengan una altura desigual (algunas
-    tienen tres, y otras cuatro líneas). Y que la elisión y los puntos
-    suspensivos queden en posiciones arbitrarias donde cabría más texto. El
-    programador no puede controlarlo.
-  </p>
-
-  <x-media>
-    <img src="elisiones.avif" alt="" width="943" height="686" />
-    <figcaption slot="caption">
-      El objeto de los contratos queda truncado de forma poco natural. Esto
-      puede resolverse con una simple propiedad <abbr>CSS</abbr>.
-    </figcaption>
-  </x-media>
-
-  <h2>Recomendación</h2>
-
-  <p>
-    Utilizar la propiedad <abbr>CSS</abbr> <code>line-clamp</code>, que resuelve
-    elegante y simplemente este problema. Véase
-    <a href="https://codepen.io/gareth53/pen/AwbQyO">este ejemplo</a> en
-    CodePen.
-  </p>
-</x-entry>
-
-<x-entry>
-  <h1>Omitir los decimales y la divisa en las celdas de resultados</h1>
-
-  <p>
-    Los céntimos de euro no son significativos para el usuario, y sustraen un
-    espacio importante en las reducidas celdas de las tablas de resultados.
-    Igualemente el símbolo del euros es redundante y puede explicitarse una
-    única vez en la cabecera de la columna, no en cada celda.
-  </p>
-
-  <p>
-    Como se aprecia en las imágenes adjuntas, esto reduce la cantidad de
-    información superflua en la tabla, mejora la legibilidad de los importes y
-    reduce la carga cognitiva en el usuario.
-  </p>
-
-  <x-media>
-    <img src="con-decimales.avif" alt="" width="943" height="686" />
-    <img src="sin-decimales.avif" alt="" width="943" height="686" />
-    <figcaption slot="caption">
-      Omitamos los decimales y la divisa para facilitar la legibilidad de los
-      importes.
-    </figcaption>
-  </x-media>
-
-  <p>
-    Los céntimos de euros sí deben mostrarse, em cambio, en la página dedicada a
-    cada contrato, donde no existen las limitaciones de espacio impuestas por la
-    estructura tabular.
-  </p>
-
-  <h2>Recomendación</h2>
-
-  <p>
-    Redondear al euro, en las tablas de resultados, todos los importes
-    económicos. Y quitar el símbolo del euro, por redundante, sustituyéndolo por
-    una mención en la cabecera de la columna.
-  </p>
-</x-entry>
-
-<x-entry>
-  <h1>No tabular datos no tabulares</h1>
-
-  <p>
-    Tradicionalmente los programadores hemos abusado de las tablas como
-    contenedor visual para presentar datos al usuario. Seguramente porque los
-    registros de las bases de datos relacionales se reúnen en un contenedor
-    lógico también denominado tabla.
-  </p>
-
-  <p>
-    Pero las tablas como contenedor lógico no tienen que ver con las tablas como
-    componente presentacional. En el diseño de interfaces de usuario
-    <strong
-      >las tablas solo son adecuadas para datos de naturaleza tabular</strong
-    >. Y los contratos públicos encajan muy mal en esta definición, tal como se
-    aprecia en las siguientes capturas de pantalla.
-  </p>
-
-  <x-media>
-    <img src="tabla-1.avif" alt="" width="943" height="686" />
-    <img src="tabla-2.avif" alt="" width="943" height="686" />
-    <figcaption slot="caption">
-      Cuando presentamos en tablas datos de naturaleza no tabular la densidad de
-      información y la legibilidad se degradan.
-    </figcaption>
-  </x-media>
-
-  <p>
-    En la implementación actual, hay tantas columnas (19), que no caben. Esto
-    fuerza al usuario a realizar
-    <strong
-      >un incómodo y no evidente desplazamiento (<i>scroll</i>)
-      horizontal</strong
-    >. El aprovechamiento de la superficie útil de pantalla es asímismo pobre,
-    pues la mayoría de las celdas contienen grandes cantidades de espacio libre,
-    mientras que las columnas con mucho texto, como
-    <q>Descripción del expediente</q> o <q>Contrato</q>, no caben y se ven
-    forzadas a una estrechez prácticamente imposible.
-  </p>
-
-  <x-media>
-    <img src="tabla.avif" alt="" width="943" height="686" />
-    <figcaption slot="caption">
-      Otro ejemplo actual, menos dramático, de resultados en forma tabular.
-      Nótese cómo las celdas de la tercera columna se presentan elididas porque
-      no caben, mientras que todas las demás, en cambio, gozan de espacio
-      sobrante.
-    </figcaption>
-  </x-media>
-
-  <h2>Recomendación</h2>
-
-  <p>
-    Recomiendo descartar las tablas para maquetar listas de contratos, y adoptar
-    en su lugar listas o cajas. Y mostrar en estos resultados solo los datos más
-    relevantes de cada contrato, presentando todos solo cuando el usuario abre
-    la vista detallada de uno.
-  </p>
-
-  <x-media>
-    <img src="otro-listado.avif" alt="" width="943" height="686" />
-    <figcaption slot="caption">
-      Rediseñando el caso anterior como una lista se mejora la legibilidad de la
-      información y se evitan la mayoría de las elisiones, sin pérdida de
-      información. Nótese cómo se crea una jerarquía visual empleando el tamaño
-      y el contraste, la adición de pictogramas y el ergonómico aumento del área
-      activa de los resultados, en azul.
-    </figcaption>
-  </x-media>
-</x-entry>
-
-<x-entry>
-  <h1>Evitar las etiquetas cuando sea posible</h1>
-
-  <p>
-    La presentación columnar en forma <q>etiqueta: dato</q>, tradicional de la
-    representación de modelos de datos, resulta artificiosa en las interfaces de
-    usuario.
-  </p>
-
-  <blockquote>
-    <p>
-      Contrato: <strong>menor</strong><br />
-      Tipo: <strong>servicios</strong><br />
-      Adjudicatario: <strong>ACME, S. A.</strong><br />
-      Duración: <strong>1 mes y 9 días</strong><br />
-      Importe: <strong>123.456 €</strong>
-    </p>
-  </blockquote>
-
-  <p>
-    Muchas de estas etiquetas, además, son omitibles porque
-    <strong>el dato ya revela su propia naturaleza</strong>.
-  </p>
-
-  <h2>Recomendación</h2>
-
-  <p>
-    Recomiendo emplear proposiciones y conectores lingüísticos para construir
-    frases naturales con los datos, evitando —cuando sea posible— la forma
-    <q>etiqueta: dato</q>.
-  </p>
-
-  <blockquote>
-    <p>
-      Contrato <strong>menor</strong> de <strong>servicios</strong> —
-      <strong>1 mes y 9 días</strong> de duración<br />
-      Adjudicado a <strong>ACME, S.A</strong> por
-      <strong>123.456 €</strong>
-    </p>
-  </blockquote>
-
-  <p>
-    Esto ha de abordarse atendiendo a la naturaleza multilingüe de los portales
-    de contratación y conectando los datos con conectores comunes a plurales y
-    singulares.
-  </p>
-
-  <x-media>
-    <img src="listado.avif" alt="" width="943" height="686" />
-    <figcaption slot="caption">
-      Un ejemplo de lista de resultados que evita las tablas y conecta los datos
-      para construir frases naturales que mejoran la legibilidad.
-    </figcaption>
-  </x-media>
-</x-entry>
-
-<x-entry>
-  <h1>Mostrar los estados como procesos</h1>
-
-  <p>
-    La contratación pública es un proceso, y durante su ciclo de vida los
-    contratos transitan por varios estados: como mínimo la licitación se
-    anuncia, el contrato se adjudica y finalmente se formaliza.
-  </p>
-
-  <p>
-    El ciudadano al que nos dirigimos<x-term href="marc"></x-term
-    ><x-term href="paula"></x-term> frecuentemente desconoce estas
-    complejidades, motivo por el cual puede ser útil informarle del estado del
-    contrato en el contexto del proceso de contratación.
-  </p>
-
-  <x-media>
-    <img src="detalle.avif" alt="" width="1660" height="1124" />
-    <figcaption slot="caption">
-      Los portales de contratación actuales solo informan de la fase.
-    </figcaption>
-  </x-media>
-
-  <h2>Recomendación</h2>
-
-  <p>
-    Recomiendo presentar la información del estado del contrato en el contexto
-    del proceso de contratación.
-  </p>
-
-  <x-media>
-    <img src="proceso.avif" alt="" width="918" height="324" />
-    <figcaption slot="caption">
-      Aunque el ciclo de vida del contrato puede ser más complejo y contener más
-      fases, esta representación proporciona al usuario una información mejor
-      contextualizada de la fase en la que se encuentra el contrato y lo que
-      está por venir.
-    </figcaption>
-  </x-media>
-</x-entry>
-
-<x-entry>
-  <h1>Hacer enlazables los contratos</h1>
-
-  <p>
-    Los contratos públicos se presentan actualmente al ciudadano en una tabla
-    ordenable, cada una de cuyas filas contiene un pictograma que, al ser tocado
-    o pinchado, abre una ventana modal con los detalles del expediente.
-  </p>
-
-  <x-media>
-    <img src="otro-listado-mas.avif" alt="" width="2378" height="1272" />
-    <figcaption slot="caption">
-      Las actuales tablas de resultados y los pictogramas que abren el detalle
-      de cada una.
-    </figcaption>
-  </x-media>
-
-  <p>
-    Sin embargo, la implementación de este mecanismo modal no proporciona una
-    dirección <abbr>URL</abbr> unívoca a cada contrato. Esto, en la práctica,
-    <strong
-      >impide a los usuarios enlazar, compartir o guardar un contrato</strong
-    >
-    en sus marcadores.
-  </p>
-
-  <x-media>
-    <img src="modal.avif" alt="" width="2378" height="1382" />
-    <figcaption slot="caption">
-      La ventana modal que se abre con la información detallada de un contrato.
-    </figcaption>
-  </x-media>
-
-  <h2>Recomendación</h2>
-
-  <p>
-    Recomiendo asignar a cada contrato una dirección <abbr>URL</abbr> única, a
-    ser posible corta, que presente automáticamente la ventana modal con los
-    detalles del contrato al ser abierta por un navegador. Esto permitirá a los
-    usuarios guardar y compartir contratos.
-  </p>
-
-  <x-media>
-    <img src="contratosdecantabria.avif" alt="" width="2386" height="1592" />
-    <figcaption slot="caption">
-      En
-      <a href="https://contratosdecantabria.es">contratosdecantabria.es</a> cada
-      contrato tiene una dirección <abbr>URL</abbr> única, que el usuario puede
-      copiar y compartir.
-    </figcaption>
-  </x-media>
-</x-entry>
-
-<x-entry>
-  <h1>No mostrar al usuario direcciones <abbr>URL</abbr></h1>
-
-  <p>
-    Las direcciones <abbr>URL</abbr> son un identificador técnico de un recurso
-    en línea. Cada recurso —e, idealmente, cada estado significativo de la
-    interfaz de usuario— ha de disponer de una dirección <abbr>URL</abbr> única.
-    El usuario ha de poder consultarla en las barras de direcciones y de estado
-    de su navegador, pero se considera una buena práctica no mostrarlas
-    directamente como un dato en la interfaz.
-  </p>
-
-  <p>
-    Las direcciones <abbr>URL</abbr> pueden ser largas y crípticas, y amedrentar
-    a algunos de nuestros usuarios<x-term href="paula"></x-term> o provocar su
-    desconfianza.
-  </p>
-
-  <blockquote>
-    <p>
-      Modificaciones de contratos:<br />
-      <a
-        href="http://www.manresa.cat/web/article/6073-modificacions-de-contractes"
-        >http://www.manresa.cat/web/article/6073-modificacions-de-contractes</a
-      >
-    </p>
-  </blockquote>
-
-  <x-media>
-    <img src="url-1.avif" alt="" width="2386" height="1592" />
-    <img src="url-2.avif" alt="" width="2386" height="1592" />
-    <figcaption slot="caption">…</figcaption>
-  </x-media>
-
-  <h2>Recomendación</h2>
-
-  <p>
-    Recomiendo sustituir las direcciones <abbr>URL</abbr> visibles en la
-    interfaz de usuario por un texto descriptivo del recurso al que enlazan.
-    Seguirán siendo interactivas, pero más legibles.
-  </p>
-
-  <blockquote>
-    <p>
-      Véanse las
-      <a
-        href="http://www.manresa.cat/web/article/6073-modificacions-de-contractes"
-        >modificaciones de contratos</a
-      >
-      en el portal del Ayuntamiento.
-    </p>
-  </blockquote>
-</x-entry>
-
-<x-entry>
-  <h1>Ocultar las secuencias de control</h1>
-
-  <p>
-    Es frecuente que la descripción del objeto de un contrato contenga saltos de
-    línea, retornos de carro o tabulaciones. Actualmente estás secuencias de
-    control del flujo del texto se están mostrando en la interfaz de usuario
-    como
-    <code>\n</code>, <code>\r</code> o <code>\t</code>.
-  </p>
-
-  <x-media>
-    <img src="secuencias-de-control.avif" alt="" width="2472" height="1238" />
-    <figcaption slot="caption">
-      Omitir las secuencias de control es sencillo y mejoraría la legibilidad.
-    </figcaption>
-  </x-media>
-
-  <h2>Recomendación</h2>
-
-  <p>
-    Reemplazar por espacios las secuencias <code>\n</code>, <code>\r</code> y
-    <code>\t</code> —entre quizá otras— antes de enviarlas a la interfaz de
-    usuario.
-  </p>
-</x-entry>
-
-<x-entry>
-  <h1>Precargar los resultados</h1>
-
-  <p>
-    La página que muestra la relación de contratos adjudicados en algunos
-    ayuntamiento contiene dos tablas. La paginación y reordenación de la primera
-    es instantánea, porque se precargan desde el servidor todos los resultados y
-    estas operaciones las realiza el navegador del usuario. En el caso de la
-    segunda, en cambio, la paginación, reordenación y filtrado puede llevar
-    varios segundos, porque estas operaciones se solicitan al servidor.
-  </p>
-
-  <p>
-    Desde el punto de vista del usuario es más conveniente precargar todos los
-    resultados desde el servidor una única vez y cachearlos para evitar
-    descargas redundantes. Esto, sin embargo puede ser desaconsejable si el
-    volumen de datos es muy grande.
-  </p>
-
-  <h2>Recomendación</h2>
-
-  <p>
-    Recomiendo precargar todos los datos desde el servidor y realizar las
-    operaciones de ordenación, paginación y filtrado en el navegador. Los datos
-    <abbr>JSON</abbr> descargados tienen una razón de compresión de en torno al
-    85&nbsp;% si Brotli o gzip están habilitados en el servidor, lo que reduce
-    drásticamente el ancho de banda y el timpo de descarga. Por otro lado, el
-    documento <abbr>JSON</abbr>
-    contiene datos que aparentemente no son mostrados en las tablas, y que
-    podrían quitarse para reducir el volumen de los datos.
-  </p>
-
-  <x-media>
-    <img src="json.avif" alt="" width="3032" height="1448" />
-    <figcaption slot="caption">
-      El documento <abbr>JSON</abbr> solicitado al servidor contiene campos
-      voluminosos que no son mostrados en las tablas, y probablemente podrían
-      eliminarse para reducir el volumen de los datos a precargar.
-    </figcaption>
-  </x-media>
-</x-entry>
-
-<x-entry>
-  <h1>Retitular las columnas de la tabla de licitaciones en trámites</h1>
-
-  <p>
-    Las columnas de la tabla de licitaciones en trámite no tienen títulos
-    descriptivos para humanos: <code>CODI_EXPEDIENT</code>,
-    <code>TIPUS_CONTRACTE</code>, <code>FASE_PUBLICACIO</code>,
-    <code>VALOR_ESTIMAT_CONTRACTE</code>…
-  </p>
-
-  <h2>Recomendación</h2>
-
-  <p>Titular las columnas de forma legible.</p>
-
-  <x-media>
-    <img src="cabeceras.avif" alt="" width="2566" height="1782" />
-    <figcaption slot="caption">
-      Donde el usuario lee <q>TIPUS_CONTRACTE</q>, debería leerse <q>Tipo</q>. Y
-      así con el resto de columnas.
-    </figcaption>
-  </x-media>
 </x-entry>
